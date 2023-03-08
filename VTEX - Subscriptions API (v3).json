@@ -9,7 +9,17 @@
     "servers": [
         {
             "url": "https://{accountName}.{environment}.com.br",
-            "description": "VTEX server url"
+            "description": "VTEX server url",
+            "variables": {
+                "accountName": {
+                    "description": "Name of the VTEX account. Used as part of the URL",
+                    "default": "{accountName}"
+                },
+                "environment": {
+                    "description": "Environment to use. Used as part of the URL.",
+                    "default": "{environment}"
+                }
+            }
         }
     ],
     "paths": {
@@ -19,32 +29,12 @@
                     "Cycles"
                 ],
                 "summary": "Get cycle details",
-                "description": "Retrieve a specific cycle by its Id.",
+                "description": "Retrieve a specific cycle by its ID.",
                 "parameters": [
-                    {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
-                    },
-                    {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
-                    },
                     {
                         "name": "cycleId",
                         "in": "path",
-                        "description": "Id from the desired cycle",
+                        "description": "ID from the desired cycle.",
                         "required": true,
                         "schema": {
                             "type": "string",
@@ -54,7 +44,7 @@
                     {
                         "name": "Content-Type",
                         "in": "header",
-                        "description": "Type of the content being sent",
+                        "description": "Type of the content being sent.",
                         "required": true,
                         "style": "simple",
                         "schema": {
@@ -65,7 +55,7 @@
                     {
                         "name": "Accept",
                         "in": "header",
-                        "description": "HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand",
+                        "description": "HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.",
                         "required": true,
                         "style": "simple",
                         "schema": {
@@ -106,26 +96,6 @@
                 "summary": "List cycles",
                 "description": "List cycles filtering by some arguments.",
                 "parameters": [
-                    {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
-                    },
-                    {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
-                    },
                     {
                         "name": "beginDate",
                         "in": "query",
@@ -194,7 +164,7 @@
                     {
                         "name": "Content-Type",
                         "in": "header",
-                        "description": "Type of the content being sent",
+                        "description": "Type of the content being sent.",
                         "required": true,
                         "style": "simple",
                         "schema": {
@@ -205,7 +175,7 @@
                     {
                         "name": "Accept",
                         "in": "header",
-                        "description": "HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand",
+                        "description": "HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.",
                         "required": true,
                         "style": "simple",
                         "schema": {
@@ -256,26 +226,6 @@
                 "description": "Try to rerun the cycle that is currently on error state",
                 "parameters": [
                     {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
-                    },
-                    {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
-                    },
-                    {
                         "name": "cycleId",
                         "in": "path",
                         "description": "Id from the cycle that will be retried",
@@ -288,7 +238,7 @@
                     {
                         "name": "Content-Type",
                         "in": "header",
-                        "description": "Type of the content being sent",
+                        "description": "Type of the content being sent.",
                         "required": true,
                         "style": "simple",
                         "schema": {
@@ -299,7 +249,7 @@
                     {
                         "name": "Accept",
                         "in": "header",
-                        "description": "HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand",
+                        "description": "HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.",
                         "required": true,
                         "style": "simple",
                         "schema": {
@@ -323,26 +273,6 @@
                 "summary": "List plans",
                 "description": "List plans filtering by some arguments.",
                 "parameters": [
-                    {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
-                    },
-                    {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
-                    },
                     {
                         "name": "periodicity",
                         "in": "query",
@@ -384,7 +314,7 @@
                     {
                         "name": "Content-Type",
                         "in": "header",
-                        "description": "Type of the content being sent",
+                        "description": "Type of the content being sent.",
                         "required": true,
                         "style": "simple",
                         "schema": {
@@ -395,7 +325,7 @@
                     {
                         "name": "Accept",
                         "in": "header",
-                        "description": "HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand",
+                        "description": "HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.",
                         "required": true,
                         "style": "simple",
                         "schema": {
@@ -446,26 +376,6 @@
                 "description": "Retrieve a specific plan by its Id.",
                 "parameters": [
                     {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
-                    },
-                    {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
-                    },
-                    {
                         "name": "id",
                         "in": "path",
                         "description": "Id from the desired plan",
@@ -478,7 +388,7 @@
                     {
                         "name": "Content-Type",
                         "in": "header",
-                        "description": "Type of the content being sent",
+                        "description": "Type of the content being sent.",
                         "required": true,
                         "style": "simple",
                         "schema": {
@@ -489,7 +399,7 @@
                     {
                         "name": "Accept",
                         "in": "header",
-                        "description": "HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand",
+                        "description": "HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.",
                         "required": true,
                         "style": "simple",
                         "schema": {
@@ -531,29 +441,9 @@
                 "description": "List all report templates available.",
                 "parameters": [
                     {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
-                    },
-                    {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
-                    },
-                    {
                         "name": "Content-Type",
                         "in": "header",
-                        "description": "Type of the content being sent",
+                        "description": "Type of the content being sent.",
                         "required": true,
                         "style": "simple",
                         "schema": {
@@ -564,7 +454,7 @@
                     {
                         "name": "Accept",
                         "in": "header",
-                        "description": "HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand",
+                        "description": "HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.",
                         "required": true,
                         "style": "simple",
                         "schema": {
@@ -615,26 +505,6 @@
                 "description": "Retrieve a specific report document by its Id.",
                 "parameters": [
                     {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
-                    },
-                    {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
-                    },
-                    {
                         "name": "reportName",
                         "in": "path",
                         "required": true,
@@ -657,7 +527,7 @@
                     {
                         "name": "Content-Type",
                         "in": "header",
-                        "description": "Type of the content being sent",
+                        "description": "Type of the content being sent.",
                         "required": true,
                         "style": "simple",
                         "schema": {
@@ -668,7 +538,7 @@
                     {
                         "name": "Accept",
                         "in": "header",
-                        "description": "HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand",
+                        "description": "HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.",
                         "required": true,
                         "style": "simple",
                         "schema": {
@@ -710,26 +580,6 @@
                 "description": "Create a new report.",
                 "parameters": [
                     {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
-                    },
-                    {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
-                    },
-                    {
                         "name": "reportName",
                         "in": "path",
                         "required": true,
@@ -750,7 +600,7 @@
                     {
                         "name": "Content-Type",
                         "in": "header",
-                        "description": "Type of the content being sent",
+                        "description": "Type of the content being sent.",
                         "required": true,
                         "style": "simple",
                         "schema": {
@@ -761,7 +611,7 @@
                     {
                         "name": "Accept",
                         "in": "header",
-                        "description": "HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand",
+                        "description": "HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.",
                         "required": true,
                         "style": "simple",
                         "schema": {
@@ -800,33 +650,13 @@
                     "Subscriptions"
                 ],
                 "summary": "Get subscription details",
-                "description": "Retrieve a specific subscription by its Id.",
+                "description": "Retrieve a specific subscription by its ID.",
                 "parameters": [
-                    {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
-                    },
-                    {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
-                    },
                     {
                         "name": "id",
                         "in": "path",
                         "required": true,
-                        "description": "Id from the target subscription",
+                        "description": "ID from the target subscription.",
                         "schema": {
                             "type": "string",
                             "nullable": true
@@ -835,7 +665,7 @@
                     {
                         "name": "Content-Type",
                         "in": "header",
-                        "description": "Type of the content being sent",
+                        "description": "Type of the content being sent.",
                         "required": true,
                         "style": "simple",
                         "schema": {
@@ -846,7 +676,7 @@
                     {
                         "name": "Accept",
                         "in": "header",
-                        "description": "HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand",
+                        "description": "HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.",
                         "required": true,
                         "style": "simple",
                         "schema": {
@@ -886,26 +716,6 @@
                 "description": "Update a specific subscription",
                 "parameters": [
                     {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
-                    },
-                    {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
-                    },
-                    {
                         "name": "id",
                         "in": "path",
                         "required": true,
@@ -918,7 +728,7 @@
                     {
                         "name": "Content-Type",
                         "in": "header",
-                        "description": "Type of the content being sent",
+                        "description": "Type of the content being sent.",
                         "required": true,
                         "style": "simple",
                         "schema": {
@@ -929,7 +739,7 @@
                     {
                         "name": "Accept",
                         "in": "header",
-                        "description": "HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand",
+                        "description": "HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.",
                         "required": true,
                         "style": "simple",
                         "schema": {
@@ -994,26 +804,6 @@
                 "summary": "List subscriptions",
                 "description": "List subscriptions filtering by some arguments",
                 "parameters": [
-                    {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
-                    },
-                    {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
-                    },
                     {
                         "name": "customerEmail",
                         "in": "query",
@@ -1100,7 +890,7 @@
                     {
                         "name": "Content-Type",
                         "in": "header",
-                        "description": "Type of the content being sent",
+                        "description": "Type of the content being sent.",
                         "required": true,
                         "style": "simple",
                         "schema": {
@@ -1111,7 +901,7 @@
                     {
                         "name": "Accept",
                         "in": "header",
-                        "description": "HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand",
+                        "description": "HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.",
                         "required": true,
                         "style": "simple",
                         "schema": {
@@ -1160,29 +950,9 @@
                 "description": "Creates a new subscription",
                 "parameters": [
                     {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
-                    },
-                    {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
-                    },
-                    {
                         "name": "Content-Type",
                         "in": "header",
-                        "description": "Type of the content being sent",
+                        "description": "Type of the content being sent.",
                         "required": true,
                         "style": "simple",
                         "schema": {
@@ -1193,7 +963,7 @@
                     {
                         "name": "Accept",
                         "in": "header",
-                        "description": "HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand",
+                        "description": "HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.",
                         "required": true,
                         "style": "simple",
                         "schema": {
@@ -1259,26 +1029,6 @@
                 "description": "Removes a specific item from a given subscription",
                 "parameters": [
                     {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
-                    },
-                    {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
-                    },
-                    {
                         "name": "id",
                         "in": "path",
                         "description": "Id from the target subscription",
@@ -1301,7 +1051,7 @@
                     {
                         "name": "Content-Type",
                         "in": "header",
-                        "description": "Type of the content being sent",
+                        "description": "Type of the content being sent.",
                         "required": true,
                         "style": "simple",
                         "schema": {
@@ -1312,7 +1062,7 @@
                     {
                         "name": "Accept",
                         "in": "header",
-                        "description": "HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand",
+                        "description": "HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.",
                         "required": true,
                         "style": "simple",
                         "schema": {
@@ -1334,26 +1084,6 @@
                 "summary": "Edit item on subscription",
                 "description": "Edit a given item on a specific subscription",
                 "parameters": [
-                    {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
-                    },
-                    {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
-                    },
                     {
                         "name": "id",
                         "in": "path",
@@ -1377,7 +1107,7 @@
                     {
                         "name": "Content-Type",
                         "in": "header",
-                        "description": "Type of the content being sent",
+                        "description": "Type of the content being sent.",
                         "required": true,
                         "style": "simple",
                         "schema": {
@@ -1388,7 +1118,7 @@
                     {
                         "name": "Accept",
                         "in": "header",
-                        "description": "HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand",
+                        "description": "HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.",
                         "required": true,
                         "style": "simple",
                         "schema": {
@@ -1454,29 +1184,9 @@
                 "description": "Add a new item to the given subscription",
                 "parameters": [
                     {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
-                    },
-                    {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
-                    },
-                    {
                         "name": "id",
                         "in": "path",
-                        "description": "Id from the target subscription",
+                        "description": "ID from the target subscription",
                         "required": true,
                         "schema": {
                             "type": "string",
@@ -1486,7 +1196,7 @@
                     {
                         "name": "Content-Type",
                         "in": "header",
-                        "description": "Type of the content being sent",
+                        "description": "Type of the content being sent.",
                         "required": true,
                         "style": "simple",
                         "schema": {
@@ -1497,7 +1207,7 @@
                     {
                         "name": "Accept",
                         "in": "header",
-                        "description": "HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand",
+                        "description": "HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.",
                         "required": true,
                         "style": "simple",
                         "schema": {
@@ -1563,26 +1273,6 @@
                 "description": "Simulates an order made by the specific subscription on checkout and retrieves the current price for items and shipping.",
                 "parameters": [
                     {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
-                    },
-                    {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
-                    },
-                    {
                         "name": "id",
                         "in": "path",
                         "required": true,
@@ -1595,7 +1285,7 @@
                     {
                         "name": "Content-Type",
                         "in": "header",
-                        "description": "Type of the content being sent",
+                        "description": "Type of the content being sent.",
                         "required": true,
                         "style": "simple",
                         "schema": {
@@ -1606,7 +1296,7 @@
                     {
                         "name": "Accept",
                         "in": "header",
-                        "description": "HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand",
+                        "description": "HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.",
                         "required": true,
                         "style": "simple",
                         "schema": {
@@ -1648,29 +1338,9 @@
                 "description": "Simulates an order made by subscriptions on checkout and retrieves the current price for items and shipping.",
                 "parameters": [
                     {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
-                    },
-                    {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
-                    },
-                    {
                         "name": "Content-Type",
                         "in": "header",
-                        "description": "Type of the content being sent",
+                        "description": "Type of the content being sent.",
                         "required": true,
                         "style": "simple",
                         "schema": {
@@ -1681,7 +1351,7 @@
                     {
                         "name": "Accept",
                         "in": "header",
-                        "description": "HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand",
+                        "description": "HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.",
                         "required": true,
                         "style": "simple",
                         "schema": {
@@ -1737,7 +1407,306 @@
                     }
                 }
             }
-        }
+        },
+        "/api/rns/pub/subscriptions/{subscriptionId}/conversation-message": {
+            "get": {
+                "tags": [
+                    "Subscriptions"
+                ],
+                "summary": "Get conversation messages",
+                "description": "Retrieve all conversation messages sent to a customer regarding a given subscription.",
+                "parameters": [
+                    {
+                        "name": "subscriptionId",
+                        "in": "path",
+                        "description": "ID of the subscription.",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "type": "string",
+                            "default": "123456789abc"
+                        }
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "description": "Type of the content being sent.",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "type": "string",
+                            "example": "application/json"
+                        }
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "description": "HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "type": "string",
+                            "example": "application/json"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "string",
+                                                "description": "Message ID"
+                                            },
+                                            "from": {
+                                                "type": "object",
+                                                "description": "Information regarding the message sender.",
+                                                "properties": {
+                                                    "conversationRelatedTo": {
+                                                        "type": "string",
+                                                        "description": "ID of the subscription related to the message."
+                                                    },
+                                                    "conversationSubject": {
+                                                        "type": "string",
+                                                        "description": "Subject of conversation."
+                                                    },
+                                                    "emailAlias": {
+                                                        "type": "string",
+                                                        "description": "Email alias."
+                                                    },
+                                                    "aliasMaskType": {
+                                                        "type": "string",
+                                                        "description": "Alias mask type."
+                                                    },
+                                                    "email": {
+                                                        "type": "string",
+                                                        "description": "Email address."
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "description": "Name."
+                                                    },
+                                                    "role": {
+                                                        "type": "string",
+                                                        "description": "Role."
+                                                    }
+                                                }
+                                            },
+                                            "to": {
+                                                "type": "array",
+                                                "description": "Information regarding the message receivers.",
+                                                "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "conversationRelatedTo": {
+                                                            "type": "string",
+                                                            "description": "ID of the subscription related to the message."
+                                                        },
+                                                        "conversationSubject": {
+                                                            "type": "string",
+                                                            "description": "Subject of conversation."
+                                                        },
+                                                        "emailAlias": {
+                                                            "type": "string",
+                                                            "description": "Email alias."
+                                                        },
+                                                        "aliasMaskType": {
+                                                            "type": "string",
+                                                            "description": "Alias mask type."
+                                                        },
+                                                        "email": {
+                                                            "type": "string",
+                                                            "description": "Email address."
+                                                        },
+                                                        "name": {
+                                                            "type": "string",
+                                                            "description": "Name."
+                                                        },
+                                                        "role": {
+                                                            "type": "string",
+                                                            "description": "Role."
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "subject": {
+                                                "type": "string",
+                                                "description": "Message subject."
+                                            },
+                                            "firstWords": {
+                                                "type": "string",
+                                                "description": "First words of the message text."
+                                            },
+                                            "body": {
+                                                "type": "string",
+                                                "description": "HTML content of the message's body."
+                                            },
+                                            "hasAttachment": {
+                                                "type": "boolean",
+                                                "description": "Indicates whether the message has at least one attachment."
+                                            },
+                                            "attachmentNames": {
+                                                "type": "array",
+                                                "description": "Attachment names.",
+                                                "items": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "date": {
+                                                "type": "string",
+                                                "description": "Date of message."
+                                            }
+                                        }
+                                    }
+                                },
+                                "example": [
+                                    {
+                                        "id": "string",
+                                        "from": {
+                                            "conversationRelatedTo": "string",
+                                            "conversationSubject": "string",
+                                            "emailAlias": "string",
+                                            "aliasMaskType": "string",
+                                            "email": "string",
+                                            "name": "string",
+                                            "role": "string"
+                                        },
+                                        "to": [
+                                            {
+                                                "conversationRelatedTo": "string",
+                                                "conversationSubject": "string",
+                                                "emailAlias": "string",
+                                                "aliasMaskType": "string",
+                                                "email": "string",
+                                                "name": "string",
+                                                "role": "string"
+                                            }
+                                        ],
+                                        "subject": "string",
+                                        "firstWords": "string",
+                                        "body": "string",
+                                        "hasAttachment": true,
+                                        "attachmentNames": [
+                                            "string"
+                                        ],
+                                        "date": "2021-08-31T22:50:53.564Z"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/rns/settings": {
+			"get": {
+				"tags": [
+					"Settings"
+				],
+				"summary": "Get Subscription Settings",
+				"description": "Lists the details of a given Subscription's settings.",
+				"operationId": "GetSettings",
+				"parameters": [
+					{
+						"name": "Content-Type",
+						"in": "header",
+						"description": "Type of the content being sent.",
+						"required": true,
+						"style": "simple",
+						"schema": {
+							"type": "string",
+							"default": "application/json"
+						}
+					},
+					{
+						"name": "Accept",
+						"in": "header",
+						"description": "HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.",
+						"required": true,
+						"style": "simple",
+						"schema": {
+							"type": "string",
+							"default": "application/json"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/settings"
+								}
+							}
+						}
+					}
+				},
+				"deprecated": false
+			},
+            "post": {
+                "tags": [
+                    "Settings"
+                ],
+                "summary": "Edit Subscriptions settings",
+                "description": "Edits Subscriptions settings in your store.",
+                "operationId": "EditSettings",
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "description": "Type of the content being sent.",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "type": "string",
+                            "default": "application/json"
+                        }
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "description": "HTTP Client Negotiation Accept Header. Indicates the types of responses the client can understand.",
+                        "required": true,
+                        "style": "simple",
+                        "schema": {
+                            "type": "string",
+                            "default": "application/json"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Request body",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/settings"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/settings"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+		}
     },
     "security": [
         {
@@ -1814,11 +1783,17 @@
                     },
                     "skuId": {
                         "type": "string",
-                        "nullable": true
+                        "nullable": true,
+                        "title": "skuId",
+                        "description": "SKU ID.",
+                        "example": "12"
                     },
                     "quantity": {
                         "type": "integer",
-                        "format": "int32"
+                        "format": "int32",
+                        "title": "quantity",
+                        "description": "Amount of units in the cart.",
+                        "example": 5
                     },
                     "status": {
                         "$ref": "#/components/schemas/Status"
@@ -1890,7 +1865,10 @@
                     },
                     "quantity": {
                         "type": "integer",
-                        "format": "int32"
+                        "format": "int32",
+                        "title": "quantity",
+                        "description": "Amount of units in the cart.",
+                        "example": 5
                     },
                     "unitPrice": {
                         "type": "integer",
@@ -2333,11 +2311,17 @@
                     },
                     "skuId": {
                         "type": "string",
-                        "nullable": true
+                        "nullable": true,
+                        "title": "skuId",
+                        "description": "SKU ID.",
+                        "example": "12"
                     },
                     "quantity": {
                         "type": "integer",
-                        "format": "int32"
+                        "format": "int32",
+                        "title": "quantity",
+                        "description": "Amount of units in the cart.",
+                        "example": 5
                     },
                     "isSkipped": {
                         "type": "boolean"
@@ -2345,6 +2329,15 @@
                     "status": {
                         "type": "string",
                         "nullable": true
+                    },
+                    "manualPrice": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "manualPrice",
+                        "description": "Manual price.",
+                        "default": null,
+                        "nullable": true,
+                        "example": 40
                     },
                     "originalOrderId": {
                         "type": "string",
@@ -2495,8 +2488,8 @@
                 },
                 "additionalProperties": false
             },
-            "AddressThinRequest": {
-                "title": "AddressRequest",
+            "shippingAddress": {
+                "title": "shippingAddress",
                 "required": [
                     "addressId",
                     "addressType"
@@ -2505,11 +2498,13 @@
                 "properties": {
                     "addressId": {
                         "type": "string",
-                        "nullable": true
+                        "nullable": true,
+                        "description": "ID of shipping address."
                     },
                     "addressType": {
                         "type": "string",
-                        "nullable": true
+                        "nullable": true,
+                        "description": "Type of the address. Possible values are `residential` or `pickup`."
                     }
                 },
                 "additionalProperties": false
@@ -2570,7 +2565,7 @@
                         "$ref": "#/components/schemas/PlanThinRequest"
                     },
                     "shippingAddress": {
-                        "$ref": "#/components/schemas/AddressThinRequest"
+                        "$ref": "#/components/schemas/shippingAddress"
                     },
                     "purchaseSettings": {
                         "$ref": "#/components/schemas/PurchaseSettingsThinRequest"
@@ -2583,11 +2578,26 @@
                 "properties": {
                     "skuId": {
                         "type": "string",
-                        "nullable": true
+                        "nullable": true,
+                        "title": "skuId",
+                        "description": "SKU ID.",
+                        "example": "12"
                     },
                     "quantity": {
                         "type": "integer",
-                        "format": "int32"
+                        "format": "int32",
+                        "title": "quantity",
+                        "description": "Amount of units in the cart.",
+                        "example": 5
+                    },
+                    "manualPrice": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "manualPrice",
+                        "description": "Manual price.",
+                        "default": null,
+                        "nullable": true,
+                        "example": 40
                     }
                 },
                 "additionalProperties": false
@@ -2628,7 +2638,7 @@
                         "$ref": "#/components/schemas/PlanThinRequest"
                     },
                     "shippingAddress": {
-                        "$ref": "#/components/schemas/AddressThinRequest"
+                        "$ref": "#/components/schemas/shippingAddress"
                     },
                     "purchaseSettings": {
                         "$ref": "#/components/schemas/PurchaseSettingsThinRequest"
@@ -2657,7 +2667,18 @@
                     "quantity": {
                         "type": "integer",
                         "format": "int32",
-                        "nullable": true
+                        "title": "quantity",
+                        "description": "Amount of units in the cart.",
+                        "example": 5
+                    },
+                    "manualPrice": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "manualPrice",
+                        "description": "Manual price.",
+                        "default": null,
+                        "nullable": true,
+                        "example": 40
                     }
                 },
                 "additionalProperties": false
@@ -2717,7 +2738,10 @@
                     },
                     "quantity": {
                         "type": "integer",
-                        "format": "int32"
+                        "format": "int32",
+                        "title": "quantity",
+                        "description": "Amount of units in the cart.",
+                        "example": 5
                     },
                     "price": {
                         "type": "integer",
@@ -2829,7 +2853,10 @@
                     },
                     "quantity": {
                         "type": "integer",
-                        "format": "int32"
+                        "format": "int32",
+                        "title": "quantity",
+                        "description": "Amount of units in the cart.",
+                        "example": 5
                     },
                     "selectedSla": {
                         "type": "string",
@@ -3010,7 +3037,10 @@
                     },
                     "quantity": {
                         "type": "integer",
-                        "format": "int32"
+                        "format": "int32",
+                        "title": "quantity",
+                        "description": "Amount of units in the cart.",
+                        "example": 5
                     },
                     "price": {
                         "type": "integer",
@@ -3217,7 +3247,156 @@
                     }
                 },
                 "additionalProperties": false
-            }
+            },
+            "settings": {
+				"title": "",
+				"description": "Subscriptions settings",
+				"type": "object",
+				"required": [
+					"slaOption",
+					"defaultSla",
+					"isUsingV3",
+					"onMigrationProcess",
+					"executionHourInUtc",
+					"workflowVersion",
+					"deliveryChannels",
+					"randomIdGeneration",
+					"isMultipleInstallmentsEnabledOnCreation",
+					"isMultipleInstallmentsEnabledOnUpdate",
+					"orderCustomDataAppId",
+					"postponeExpiration",
+					"manualPriceAllowed",
+					"useItemPriceFromOriginalOrder"
+				],
+				"properties": {
+					"slaOption": {
+						"title": "slaOption",
+						"description": "Delivery method.",
+						"type": "string",
+						"default": "",
+						"example": "NONE"
+					},
+					"defaultSla": {
+						"title": "defaultSla",
+						"description": "Default delivery method.",
+						"type": "string",
+						"default": null,
+						"nullable": true,
+						"example": null
+					},
+					"isUsingV3": {
+						"title": "isUsingV3",
+						"description": "Indicates whether or not Subscriptions V3 is enabled.",
+						"type": "boolean",
+						"default": false,
+						"example": true
+					},
+					"onMigrationProcess": {
+						"title": "onMigrationProcess",
+						"description": "Indicates whether or not the account is in the migration process to Subscriptions V3.",
+						"type": "boolean",
+						"default": false,
+						"example": false
+					},
+					"executionHourInUtc": {
+						"title": "executionHourInUtc",
+						"description": "Indicates the time future subscription orders will be generated.",
+						"type": "integer",
+						"default": 0,
+						"example": 9
+					},
+					"workflowVersion": {
+						"title": "workflowVersion",
+						"description": "Workflow version.",
+						"type": "string",
+						"default": "",
+						"example": "1.1"
+					},
+					"deliveryChannels": {
+						"title": "deliveryChannels",
+						"description": "Array containing delivery channels.",
+						"type": "array",
+						"default": [],
+						"items": {
+							"title": "",
+							"description": "Type of delivery channel. The values that are possible are: `pickup-in-point` for pickup point and `delivery` for regular delivery.",
+							"type": "string",
+							"default": "",
+							"example": "delivery"
+						},
+						"example": "delivery"
+					},
+					"randomIdGeneration": {
+						"title": "randomIdGeneration",
+						"description": "Defines whether or not the subscription order IDs will be randomly generated.",
+						"type": "boolean",
+						"default": false,
+						"example": false
+					},
+					"isMultipleInstallmentsEnabledOnCreation": {
+						"title": "isMultipleInstallmentsEnabledOnCreation",
+						"description": "Defines whether or not multiple installments are enabled when a subscription is created.",
+						"type": "boolean",
+						"default": false,
+						"example": false
+					},
+					"isMultipleInstallmentsEnabledOnUpdate": {
+						"title": "isMultipleInstallmentsEnabledOnUpdate",
+						"description": "Defines whether or not multiple installments are enabled when a subscription is updated.",
+						"type": "boolean",
+						"default": false,
+						"example": false
+					},
+					"orderCustomDataAppId": {
+						"title": "orderCustomDataAppId",
+						"description": "When filled, this field passes along the `customData` infomration in the order to the future recurrent subscription orders.",
+						"type": "string",
+						"default": null,
+						"example": null
+					},
+					"postponeExpiration": {
+						"title": "postponeExpiration",
+						"description": "Defines whether or not the expiration of subscriptions can be postponed.",
+						"type": "boolean",
+						"default": false,
+						"example": false
+					},
+                    "manualPriceAllowed": {
+                        "title": "manualPriceAllowed",
+                        "description": "When set to `true`, this property enables manual price configuration in subscription items. This is valid for all existing subscriptions, provided that there is a manual price configured and that `isUsingV3` is `true`.",
+                        "type": "boolean",
+                        "default": false,
+                        "example": false
+                    },
+                    "useItemPriceFromOriginalOrder": {
+                        "title": "useItemPriceFromOriginalOrder",
+                        "description": "When set to `true`, this property enables using the manual price for each item from the original subscription order. This is only valid for new subscriptions, created from the moment this configuration is enabled. For this to work, it is mandatory that the `manualPriceAllowed` property is set to `true` and that `isUsingV3` is `true`.",
+                        "type": "boolean",
+                        "default": false,
+                        "example": false
+                    }
+				},
+				"example": [
+					{
+						"slaOption": "NONE",
+						"defaultSla": null,
+						"isUsingV3": true,
+						"onMigrationProcess": false,
+						"executionHourInUtc": 9,
+						"workflowVersion": "1.1",
+						"deliveryChannels": [
+							"delivery"
+						],
+						"randomIdGeneration": false,
+						"isMultipleInstallmentsEnabledOnCreation": false,
+						"isMultipleInstallmentsEnabledOnUpdate": false,
+						"orderCustomDataAppId": null,
+						"postponeExpiration": false,
+						"manualPriceAllowed": false,
+						"useItemPriceFromOriginalOrder": false
+					}
+				]
+			}
         }
     }
 }

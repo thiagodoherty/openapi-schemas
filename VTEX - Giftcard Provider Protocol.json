@@ -13,7 +13,7 @@
 		}
 	],
 	"paths": {
-		"/giftcards/_search": {
+		"/api/giftcards/_search": {
 			"post": {
 				"tags": [
 					"Gift Cards"
@@ -22,26 +22,6 @@
 				"description": "Request a list of all giftcards available for a given client/cart(request).",
 				"operationId": "ListAllGiftCards",
 				"parameters": [
-                    {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
-                    },
-                    {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
-                    },
 					{
 						"name": "Accept",
 						"in": "header",
@@ -50,7 +30,7 @@
 						"style": "simple",
 						"schema": {
 							"type": "string",
-							"default": "application/json"
+							"default": "application/vnd.vtex.giftcardproviders.v1+json"
 						}
 					},
 					{
@@ -61,7 +41,7 @@
 						"style": "simple",
 						"schema": {
 							"type": "string",
-							"default": "application/json"
+							"default": "application/vnd.vtex.giftcardproviders.v1+json"
 						}
 					},
 					{
@@ -164,7 +144,7 @@
 				"deprecated": false
 			}
 		},
-		"/giftcards/{giftCardID}": {
+		"/api/giftcards/{giftCardID}": {
 			"get": {
 				"tags": [
 					"Gift Cards"
@@ -173,26 +153,6 @@
 				"description": "Returns a specific giftcard with details.",
 				"operationId": "GetGiftCardbyID",
 				"parameters": [
-                    {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
-                    },
-                    {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
-                    },
 					{
 						"name": "Accept",
 						"in": "header",
@@ -201,7 +161,7 @@
 						"style": "simple",
 						"schema": {
 							"type": "string",
-							"default": "application/json"
+							"default": "application/vnd.vtex.giftcardproviders.v1+json"
 						}
 					},
 					{
@@ -212,7 +172,7 @@
 						"style": "simple",
 						"schema": {
 							"type": "string",
-							"default": "application/json"
+							"default": "application/vnd.vtex.giftcardproviders.v1+json"
 						}
 					},
 					{
@@ -265,7 +225,6 @@
 									"balance": 5.9,
 									"emissionDate": "2018-03-20T09:37:13.797",
 									"expiringDate": "2020-03-18T11:42:55.183",
-									"discount": false,
 									"transaction": {
 										"href": "/gatewayqa/giftcards/3b1abc17-988e-4a14-8b7f-31fc6a5b955c_24/transactions"
 									}
@@ -277,7 +236,7 @@
 				"deprecated": false
 			}
 		},
-		"/giftcards": {
+		"/api/giftcards": {
 			"post": {
 				"tags": [
 					"Gift Cards"
@@ -286,26 +245,6 @@
 				"description": "Creates a giftcard in a giftcard provider.",
 				"operationId": "CreateGiftCard",
 				"parameters": [
-                    {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
-                    },
-                    {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
-                    },
 					{
 						"name": "Accept",
 						"in": "header",
@@ -314,7 +253,7 @@
 						"style": "simple",
 						"schema": {
 							"type": "string",
-							"default": "application/json"
+							"default": "application/vnd.vtex.giftcardproviders.v1+json"
 						}
 					},
 					{
@@ -325,7 +264,7 @@
 						"style": "simple",
 						"schema": {
 							"type": "string",
-							"default": "application/json"
+							"default": "application/vnd.vtex.giftcardproviders.v1+json"
 						}
 					},
 					{
@@ -397,26 +336,6 @@
 				"description": "Creates a transaction to a giftcard.",
 				"operationId": "CreateGiftCardTransaction",
 				"parameters": [
-                    {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
-                    },
-                    {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
-                    },
 					{
 						"name": "Accept",
 						"in": "header",
@@ -569,26 +488,6 @@
 				"description": "Return a summary of all transactions from a giftcard.",
 				"operationId": "ListAllGiftCardTransactions",
 				"parameters": [
-                    {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
-                    },
-                    {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
-                    },
 					{
 						"name": "Accept",
 						"in": "header",
@@ -689,26 +588,6 @@
 				"description": "Returns a specific giftcard transaction.",
 				"operationId": "GetGiftCardTransactionbyID",
 				"parameters": [
-                    {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
-                    },
-                    {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
-                    },
 					{
 						"name": "Accept",
 						"in": "header",
@@ -863,26 +742,6 @@
 				"description": "Returns the transaction authorization info.",
 				"operationId": "GetGiftCardTransactionAuthorization",
 				"parameters": [
-                    {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
-                    },
-                    {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
-                    },
 					{
 						"name": "Accept",
 						"in": "header",
@@ -980,26 +839,6 @@
 				"description": "Creates a cancellation transaction to a giftcard.",
 				"operationId": "CreateGiftCardTransactionCancellation",
 				"parameters": [
-                    {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
-                    },
-                    {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
-                    },
 					{
 						"name": "Accept",
 						"in": "header",
@@ -1110,26 +949,6 @@
 				"description": "Returns a collection of transaction cancellations from a giftcard.",
 				"operationId": "ListAllGiftCardTransactionsCancellations",
 				"parameters": [
-                    {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
-                    },
-                    {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
-                    },
 					{
 						"name": "Accept",
 						"in": "header",
@@ -1232,26 +1051,6 @@
 				"description": "Creates a settlement transaction to a giftcard.",
 				"operationId": "CreateGiftCardTransactionSettlement",
 				"parameters": [
-                    {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
-                    },
-                    {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
-                    },
 					{
 						"name": "Accept",
 						"in": "header",
@@ -1357,26 +1156,6 @@
 				"description": "Returns a collection of settlement transactions from a giftcard.",
 				"operationId": "ListAllGiftCardTransactionsSettlements",
 				"parameters": [
-                    {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
-                    },
-                    {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
-                    },
 					{
 						"name": "Accept",
 						"in": "header",
@@ -1553,7 +1332,9 @@
 						"nullable": true
 					},
 					"redemptionCode": {
-						"type": "string"
+						"type": "string",
+						"default": "AH52F7",
+                        "description": "Minimum of six characters"
 					},
 					"discounts": {
 						"type": "integer",
@@ -1710,7 +1491,9 @@
 						"type": "string"
 					},
 					"redemptionCode": {
-						"type": "string"
+						"type": "string",
+						"default": "AH52F7",
+                        "description": "Minimum of six characters"
 					},
 					"balance": {
 						"type": "number"
@@ -1828,6 +1611,8 @@
 					},
 					"redemptionCode": {
 						"type": "string",
+						"default": "AH52F7",
+                        "description": "Minimum of six characters",
 						"nullable": true
 					},
 					"requestId": {

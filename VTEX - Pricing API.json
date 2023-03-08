@@ -9,36 +9,24 @@
     "servers": [
         {
             "url": "https://api.vtex.com/{accountName}/pricing",
-            "description": "VTEX server url"
+            "description": "VTEX server url",
+            "variables": {
+                "accountName": {
+                    "description": "Name of the VTEX account. Used as part of the URL",
+                    "default": "{accountName}"
+                }
+            }
         }
     ],
     "paths": {
         "/pipeline/catalog/": {
             "post": {
-                "tags": ["Price Tables"],
+                "tags": [
+                    "Price Tables"
+                ],
                 "summary": "Create rules for a price table",
                 "description": "This method will create the rules from a specific Price Table",
                 "parameters": [
-                    {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
-                    },
-                    {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
-                    },
                     {
                         "name": "Accept",
                         "in": "header",
@@ -47,7 +35,7 @@
                         "style": "simple",
                         "schema": {
                             "type": "string",
-                            "example": "application/vnd.vtex.pricing.v3+json"
+                            "example": "application/json"
                         }
                     },
                     {
@@ -71,31 +59,13 @@
         },
         "/prices/{itemId}": {
             "get": {
-                "tags": ["Prices and Fixed Prices"],
+                "tags": [
+                    "Prices and Fixed Prices"
+                ],
                 "summary": "Get Price",
                 "description": "Retrieves price data by SKU Id It is possible that on the property fixedPrices exists a list of specific prices for Trade Policies and Minimium Quantities of the SKU. Fixed Prices may also be scheduled",
                 "operationId": "GetPrice",
                 "parameters": [
-                    {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
-                    },
-                    {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
-                    },
                     {
                         "name": "Content-Type",
                         "in": "header",
@@ -115,7 +85,7 @@
                         "style": "simple",
                         "schema": {
                             "type": "string",
-                            "example": "application/vnd.vtex.pricing.v3+json"
+                            "example": "application/json"
                         }
                     },
                     {
@@ -131,7 +101,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "",
+                        "description": "OK",
                         "headers": {
                             "Access-Control-Allow-Credentials": {
                                 "content": {
@@ -235,7 +205,7 @@
                             }
                         },
                         "content": {
-                            "application/json; charset=utf-8": {
+                            "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/PricewithFixedPrices_scheduledandindifferenttradepolicies_"
                                 },
@@ -319,31 +289,13 @@
                 ]
             },
             "delete": {
-                "tags": ["Prices and Fixed Prices"],
+                "tags": [
+                    "Prices and Fixed Prices"
+                ],
                 "summary": "Delete Price",
                 "description": "Removes an SKU price. This action removes both Base Price and all available Fixed Prices for and SKU in all trade policies",
                 "operationId": "DeletePrice",
                 "parameters": [
-                    {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
-                    },
-                    {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
-                    },
                     {
                         "name": "Content-Type",
                         "in": "header",
@@ -504,30 +456,13 @@
                 ]
             },
             "put": {
-                "tags": ["Prices and Fixed Prices"],
-                "summary": " Create / Edit Price or Fixed Price",
-                "description": "Creates or updates an SKU Price or Fixed Price. The Fixed Price is an optional price of the SKU for a specific Trade Policy with a specific Minimum Quantity to be activated",
+                "tags": [
+                    "Prices and Fixed Prices"
+                ],
+                "summary": " Create or update base or fixed prices",
+                "description": "Creates or updates an SKU base or fixed prices. The **base price** is the basic selling price of a product, it comprises the cost price and the markup wanted in the sale of the product. The **fixed price** is an optional price of the SKU for a specific trade policy with a specific minimum quantity to be activated",
+                "operationId": "CreateUpdatePriceOrFixedPrice",
                 "parameters": [
-                    {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
-                    },
-                    {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
-                    },
                     {
                         "name": "Accept",
                         "in": "header",
@@ -536,7 +471,7 @@
                         "style": "simple",
                         "schema": {
                             "type": "string",
-                            "example": "application/vnd.vtex.pricing.v3+json"
+                            "example": "application/json"
                         }
                     },
                     {
@@ -553,11 +488,12 @@
                     {
                         "name": "itemId",
                         "in": "path",
-                        "description": "SKU ID",
+                        "description": "SKU unique identifier number",
                         "required": true,
                         "style": "simple",
                         "schema": {
-                            "type": "integer"
+                            "type": "integer",
+                            "default": 1
                         }
                     }
                 ],
@@ -571,9 +507,8 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "type": "array",
-                                "title": "Request body",
-                                "default": {},
+                                "type": "object",
+                                "title": "",
                                 "required": [
                                     "markup",
                                     "basePrice",
@@ -583,31 +518,32 @@
                                     "markup": {
                                         "type": "integer",
                                         "title": "markup",
-                                        "description": "Price Markup",
+                                        "description": "The profit percentage that is to be obtained from the sale of that SKU. If you decide to fill the `markup` item, you must also fill the `costPrice` and `basePrice` will be automatically generated based on both values.",
                                         "default": 30
                                     },
                                     "listPrice": {
                                         "type": "number",
                                         "title": "listPrice",
-                                        "description": "SKU List Price",
-                                        "default": 12
+                                        "description": "SKU's suggested selling price",
+                                        "default": 50.00
                                     },
                                     "basePrice": {
                                         "type": "number",
                                         "title": "basePrice",
-                                        "description": "SKU Selling Base Price",
-                                        "default": 100
+                                        "description": "SKU selling base price. If you decide to fill only the `basePrice` item, the `markup` and `costPrice` will be automatically generated to adapt to the number inserted in `basePrice`.",
+                                        "default": 100.00
                                     },
                                     "costPrice": {
                                         "type": "number",
                                         "title": "costPrice",
-                                        "description": "SKU Selling Cost Price"
+                                        "description": "SKU selling cost price.If you decide to fill the `costPrice` item, you must also fill the `markup` and `basePrice` will be automatically generated based on both values.",
+                                        "default": 35.00
                                     },
                                     "fixedPrices": {
                                         "type": "array",
                                         "items": {
                                             "title": "fixedPrices",
-                                            "description": "List of existing Fixed Prices",
+                                            "description": "Array with general information about the SKU's fixed prices",
                                             "default": [],
                                             "required": [
                                                 "minQuantity",
@@ -618,42 +554,48 @@
                                                 "tradePolicyId": {
                                                     "type": "string",
                                                     "title": "tradePolicyId",
-                                                    "description": "Trade Policy ID",
-                                                    "default": ""
+                                                    "description": "Trade policy name or ID that will have the fixed price configured",
+                                                    "default": "1"
                                                 },
                                                 "value": {
                                                     "type": "number",
                                                     "title": "value",
-                                                    "description": "Price"
+                                                    "description": "Fixed price value",
+                                                    "default": 50.50
                                                 },
                                                 "listPrice": {
                                                     "type": "number",
                                                     "title": "listPrice",
-                                                    "description": "SKU List Fixed Price"
+                                                    "description": "SKU List Fixed Price",
+                                                    "default": 50.50
                                                 },
                                                 "minQuantity": {
                                                     "type": "integer",
                                                     "title": "minQuantity",
-                                                    "description": "Minimum quantity of the SKU"
+                                                    "description": "Minimum quantity of the SKU to the fixed price be applied",
+                                                    "default": 2
                                                 },
                                                 "dateRange": {
                                                     "type": "object",
                                                     "title": "dateRange",
-                                                    "description": "Trade Policy Fixed Price Validity Period Object",
+                                                    "description": "Period of time that the fixed price will be applied to the SKU",
                                                     "default": {},
-                                                    "required": ["from", "to"],
+                                                    "required": [
+                                                        "from",
+                                                        "to"
+                                                    ],
                                                     "properties": {
                                                         "from": {
                                                             "type": "string",
                                                             "title": "from",
-                                                            "description": "Validity start Date",
-                                                            "default": ""
+                                                            "description": "Start date of the price",
+                                                            "default": "2021-12-30T22:00:00-03:00"
                                                         },
                                                         "to": {
                                                             "type": "string",
                                                             "title": "to",
-                                                            "description": "Validity end Date",
-                                                            "default": ""
+                                                            "description": "End date of the price",
+                                                            "default": "2021-12-30T22:00:00-03:00"
                                                         }
                                                     }
                                                 }
@@ -669,31 +611,13 @@
         },
         "/prices/{itemId}/fixed": {
             "get": {
-                "tags": ["Prices and Fixed Prices"],
+                "tags": [
+                    "Prices and Fixed Prices"
+                ],
                 "summary": "Get Fixed Prices",
                 "description": "Fixed Prices are a sub resource of Prices. This method get an array of Fixed Prices for an SKU in a Trade Policy with Minimum Quantities",
                 "operationId": "GetFixedPrices",
                 "parameters": [
-                    {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
-                    },
-                    {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
-                    },
                     {
                         "name": "Accept",
                         "in": "header",
@@ -702,7 +626,7 @@
                         "style": "simple",
                         "schema": {
                             "type": "string",
-                            "example": "application/vnd.vtex.pricing.v3+json"
+                            "example": "application/json"
                         }
                     },
                     {
@@ -883,31 +807,13 @@
         },
         "/prices/{itemId}/fixed/{priceTableId}": {
             "post": {
-                "tags": ["Prices and Fixed Prices"],
-                "summary": "Create / Edit Fixed Prices on a price table (or trade policy)",
-                "description": "This method will create or update the Fixed Prices of an SKU just for an specific Price Table (according to its Trade Policy)",
-                "operationId": "Create/EditFixedPricesonapricetable(ortradepolicy)",
+                "tags": [
+                    "Prices and Fixed Prices"
+                ],
+                "summary": "Create or update fixed prices on a price table or trade policy",
+                "description": "Creates or updates the fixed prices of an SKU for a specific price table or trade policy. You can add one or multiple fixed prices per SKU.",
+                "operationId": "CreateEditFixedPricesonapricetableOrtradepolicy",
                 "parameters": [
-                    {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
-                    },
-                    {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
-                    },
                     {
                         "name": "Content-Type",
                         "in": "header",
@@ -933,7 +839,7 @@
                     {
                         "name": "itemId",
                         "in": "path",
-                        "description": "SKU Id",
+                        "description": "SKU unique identifier number",
                         "required": true,
                         "style": "simple",
                         "schema": {
@@ -943,11 +849,12 @@
                     {
                         "name": "priceTableId",
                         "in": "path",
-                        "description": "SKU Price Table Name",
+                        "description": "SKU **price table** name or **trade policy** ID",
                         "required": true,
                         "style": "simple",
                         "schema": {
-                            "type": "string"
+                            "type": "string",
+                            "default": "priceTableA"
                         }
                     }
                 ],
@@ -957,21 +864,61 @@
                         "application/json": {
                             "schema": {
                                 "type": "array",
+                                "title": "",
                                 "items": {
-                                    "$ref": "#/components/schemas/Create~1EditFixedPricesonapricetable_ortradepolicy_Request"
-                                },
-                                "description": ""
-                            },
-                            "example": [
-                                {
-                                    "value": 60.5,
-                                    "listPrice": 90.5,
-                                    "minQuantity": 1
+                                    "type": "object",
+                                    "required": [
+                                        "value",
+                                        "minQuantity"
+                                    ],
+                                    "properties": {
+                                        "value": {
+                                            "type": "number",
+                                            "title": "value",
+                                            "description": "Fixed price value",
+                                            "default": 50.50
+                                        },
+                                        "listPrice": {
+                                            "type": "number",
+                                            "title": "listPrice",
+                                            "description": "SKU List Fixed Price",
+                                            "default": 50.50
+                                        },
+                                        "minQuantity": {
+                                            "type": "integer",
+                                            "title": "minQuantity",
+                                            "description": "Minimum quantity of the SKU to the fixed price be applied",
+                                            "default": 2
+                                        },
+                                        "dateRange": {
+                                            "type": "object",
+                                            "title": "dateRange",
+                                            "description": "Period of time that the fixed price will be applied to the SKU",
+                                            "default": {},
+                                            "required": [
+                                                "from",
+                                                "to"
+                                            ],
+                                            "properties": {
+                                                "from": {
+                                                    "type": "string",
+                                                    "title": "from",
+                                                    "description": "Start date of the price",
+                                                    "default": "2021-12-30T22:00:00-03:00"
+                                                },
+                                                "to": {
+                                                    "type": "string",
+                                                    "title": "to",
+                                                    "description": "End date of the price",
+                                                    "default": "2021-12-30T22:00:00-04:00"
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
-                            ]
+                            }
                         }
-                    },
-                    "required": true
+                    }
                 },
                 "responses": {
                     "200": {
@@ -1010,31 +957,13 @@
                 ]
             },
             "get": {
-                "tags": ["Prices and Fixed Prices"],
+                "tags": [
+                    "Prices and Fixed Prices"
+                ],
                 "summary": "Get Fixed Prices on a price table",
                 "description": "Gets all Fixed Prices on a price table (or trade policy)",
                 "operationId": "GetFixedPricesonapricetable",
                 "parameters": [
-                    {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
-                    },
-                    {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
-                    },
                     {
                         "name": "Content-Type",
                         "in": "header",
@@ -1054,7 +983,7 @@
                         "style": "simple",
                         "schema": {
                             "type": "string",
-                            "example": "application/vnd.vtex.pricing.v3+json"
+                            "example": "application/json"
                         }
                     },
                     {
@@ -1232,31 +1161,13 @@
                 ]
             },
             "delete": {
-                "tags": ["Prices and Fixed Prices"],
+                "tags": [
+                    "Prices and Fixed Prices"
+                ],
                 "summary": "Delete fixed prices on a price table (or trade policy)",
                 "description": "Deletes all Fixed Prices of an SKU in a specific Price Table (or Trade Policy)",
                 "operationId": "Deletefixedpricesonapricetable(ortradepolicy)",
                 "parameters": [
-                    {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
-                    },
-                    {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
-                    },
                     {
                         "name": "Content-Type",
                         "in": "header",
@@ -1276,7 +1187,7 @@
                         "style": "simple",
                         "schema": {
                             "type": "string",
-                            "example": "application/vnd.vtex.pricing.v3+json"
+                            "example": "application/json"
                         }
                     },
                     {
@@ -1347,31 +1258,13 @@
         },
         "/prices/{itemId}/computed/{priceTableId}": {
             "get": {
-                "tags": ["Prices and Fixed Prices"],
+                "tags": [
+                    "Prices and Fixed Prices"
+                ],
                 "summary": "Get Computed Price by price table",
                 "description": "Gets a computed Price (Price after all steps in pricing pipeline) for an SKU in a specific Trade Policy (or Price Table)",
                 "operationId": "GetComputedPricebypricetable",
                 "parameters": [
-                    {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
-                    },
-                    {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
-                    },
                     {
                         "name": "categoryIds",
                         "in": "query",
@@ -1427,7 +1320,7 @@
                         "style": "simple",
                         "schema": {
                             "type": "string",
-                            "example": "application/vnd.vtex.pricing.v3+json"
+                            "example": "application/json"
                         }
                     },
                     {
@@ -1596,31 +1489,13 @@
         },
         "/config": {
             "get": {
-                "tags": ["Pricing Config"],
+                "tags": [
+                    "Pricing Config"
+                ],
                 "summary": "Get Pricing Config",
                 "description": "Retrieves Pricing Module Configuration",
                 "operationId": "GetPricingConfig",
                 "parameters": [
-                    {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
-                    },
-                    {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
-                    },
                     {
                         "name": "Content-Type",
                         "in": "header",
@@ -1640,7 +1515,7 @@
                         "style": "simple",
                         "schema": {
                             "type": "string",
-                            "example": "application/vnd.vtex.pricing.v3+json"
+                            "example": "application/json"
                         }
                     }
                 ],
@@ -1793,31 +1668,13 @@
         },
         "/migration": {
             "get": {
-                "tags": ["Pricing Config"],
+                "tags": [
+                    "Pricing Config"
+                ],
                 "summary": "Gets Pricing v2 Active Status",
                 "description": "Gets Pricing v2 Active Status",
                 "operationId": "GetPricingv2ActiveStatus",
                 "parameters": [
-                    {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
-                    },
-                    {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
-                    },
                     {
                         "name": "Content-Type",
                         "in": "header",
@@ -1837,7 +1694,7 @@
                         "style": "simple",
                         "schema": {
                             "type": "string",
-                            "example": "application/vnd.vtex.pricing.v3+json"
+                            "example": "application/json"
                         }
                     }
                 ],
@@ -1984,31 +1841,13 @@
         },
         "/pipeline/catalog/{priceTableId}": {
             "get": {
-                "tags": ["Price Tables"],
+                "tags": [
+                    "Price Tables"
+                ],
                 "summary": "Get rules for a price table",
                 "description": "This method will retrieve the rules from a specific Price Table. It will delete all the rules from the requested Price Table and create new rules based on the content of the request",
                 "operationId": "Createrulesforapricetable",
                 "parameters": [
-                    {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
-                    },
-                    {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
-                    },
                     {
                         "name": "Content-Type",
                         "in": "header",
@@ -2028,7 +1867,7 @@
                         "style": "simple",
                         "schema": {
                             "type": "string",
-                            "example": "application/vnd.vtex.pricing.v3+json"
+                            "example": "application/json"
                         }
                     },
                     {
@@ -2061,30 +1900,12 @@
                 ]
             },
             "put": {
-                "tags": ["Price Tables"],
+                "tags": [
+                    "Price Tables"
+                ],
                 "summary": "Update rules for a price table",
                 "description": "This method will update the rules from a specific Price Table. It will delete all the rules from the requested Price Table and create new rules based on the content of the request",
                 "parameters": [
-                    {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
-                    },
-                    {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
-                    },
                     {
                         "name": "Content-Type",
                         "in": "header",
@@ -2104,7 +1925,7 @@
                         "style": "simple",
                         "schema": {
                             "type": "string",
-                            "example": "application/vnd.vtex.pricing.v3+json"
+                            "example": "application/json"
                         }
                     },
                     {
@@ -2130,7 +1951,9 @@
                         "application/json": {
                             "schema": {
                                 "type": "object",
-                                "required": ["rules"],
+                                "required": [
+                                    "rules"
+                                ],
                                 "properties": {
                                     "rules": {
                                         "type": "array",
@@ -2313,9 +2136,14 @@
                     "minQuantity": 1
                 }
             },
-            "Create/EditFixedPriceRequest": {
+            "CreateEditFixedPriceRequest": {
                 "title": "Create/EditFixedPriceRequest",
-                "required": ["listPrice", "costPrice", "markup", "fixedPrices"],
+                "required": [
+                    "listPrice",
+                    "costPrice",
+                    "markup",
+                    "fixedPrices"
+                ],
                 "type": "object",
                 "properties": {
                     "listPrice": {
@@ -2390,43 +2218,24 @@
             },
             "DateRange": {
                 "title": "DateRange",
-                "required": ["from", "to"],
+                "required": [
+                    "from",
+                    "to"
+                ],
                 "type": "object",
                 "properties": {
                     "from": {
                         "type": "string",
-                        "description": "Validity start Date"
+                        "description": "Indicates the date from which the fixed price will no longer be valid"
                     },
                     "to": {
                         "type": "string",
-                        "description": "Validity end Date"
+                        "description": "Indicates the time from which the fixed price will no longer be valid"
                     }
                 },
                 "example": {
                     "from": "2017-12-07T14:30:00Z",
                     "to": "2017-12-30T14:30:00Z"
-                }
-            },
-            "Create/EditFixedPricesonapricetable_ortradepolicy_Request": {
-                "title": "Create/EditFixedPricesonapricetable(ortradepolicy)Request",
-                "required": ["value", "listPrice", "minQuantity"],
-                "type": "object",
-                "properties": {
-                    "value": {
-                        "type": "number"
-                    },
-                    "listPrice": {
-                        "type": "number"
-                    },
-                    "minQuantity": {
-                        "type": "integer",
-                        "format": "int32"
-                    }
-                },
-                "example": {
-                    "value": 60.5,
-                    "listPrice": 90.5,
-                    "minQuantity": 1
                 }
             },
             "Addingafixedpriceforonespecificpricetable": {
@@ -2463,7 +2272,12 @@
             },
             "SchedulingFixedPricesRequest": {
                 "title": "SchedulingFixedPricesRequest",
-                "required": ["listPrice", "costPrice", "markup", "fixedPrices"],
+                "required": [
+                    "listPrice",
+                    "costPrice",
+                    "markup",
+                    "fixedPrices"
+                ],
                 "type": "object",
                 "properties": {
                     "listPrice": {
@@ -2532,30 +2346,35 @@
                 "type": "object",
                 "properties": {
                     "itemId": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "SKU ID"
                     },
                     "listPrice": {
                         "type": "integer",
-                        "format": "int32"
+                        "format": "int32",
+                        "description": "Suggested retail price for the SKU"
                     },
                     "costPrice": {
                         "type": "integer",
-                        "format": "int32"
+                        "format": "int32",
+                        "description": "SKU's cost price"
                     },
                     "markup": {
                         "type": "integer",
-                        "format": "int32"
+                        "format": "int32",
+                        "description": "Desired profit margin with the SKU's sale"
                     },
                     "basePrice": {
                         "type": "integer",
-                        "format": "int32"
+                        "format": "int32",
+                        "description": "SKU's reference price"
                     },
                     "fixedPrices": {
                         "type": "array",
                         "items": {
                             "$ref": "#/components/schemas/FixedPrice2"
                         },
-                        "description": ""
+                        "description": "The fixed price is a price that overlaps all other existing price configurations of a price table."
                     }
                 },
                 "example": {
@@ -2633,18 +2452,22 @@
                 "type": "object",
                 "properties": {
                     "tradePolicyId": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Fixed price's trade policy name or ID"
                     },
                     "value": {
-                        "type": "number"
+                        "type": "number",
+                        "description": "Fixed price amount"
                     },
                     "listPrice": {
                         "type": "string",
-                        "nullable": true
+                        "nullable": true,
+                        "description": "Fixed price's suggested retail price for the SKU"
                     },
                     "minQuantity": {
                         "type": "integer",
-                        "format": "int32"
+                        "format": "int32",
+                        "description": "The minimum SKU quantity for the fixed price to be applied"
                     },
                     "dateRange": {
                         "$ref": "#/components/schemas/DateRange"
@@ -2720,9 +2543,14 @@
                     "priceValidUntil": "2018-12-20T18:12:14Z"
                 }
             },
-            "Create/EditPriceRequest": {
+            "CreateEditPriceRequest": {
                 "title": "Create/EditPriceRequest",
-                "required": ["listPrice", "costPrice", "markup", "fixedPrices"],
+                "required": [
+                    "listPrice",
+                    "costPrice",
+                    "markup",
+                    "fixedPrices"
+                ],
                 "type": "object",
                 "properties": {
                     "listPrice": {
@@ -2793,7 +2621,10 @@
             },
             "Default3": {
                 "title": "Default3",
-                "required": ["isActive", "hasMigrated"],
+                "required": [
+                    "isActive",
+                    "hasMigrated"
+                ],
                 "type": "object",
                 "properties": {
                     "isActive": {
@@ -2847,5 +2678,11 @@
     "x-explorer-enabled": true,
     "x-proxy-enabled": true,
     "x-samples-enabled": true,
-    "x-samples-languages": ["curl", "node", "ruby", "javascript", "python"]
+    "x-samples-languages": [
+        "curl",
+        "node",
+        "ruby",
+        "javascript",
+        "python"
+    ]
 }

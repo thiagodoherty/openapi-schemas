@@ -9,99 +9,45 @@
     "servers": [
         {
             "url": "https://{accountName}.{environment}.com.br",
-            "description": "VTEX server url"
+            "description": "VTEX server url",
+            "variables": {
+                "accountName": {
+                    "description": "Name of the VTEX account. Used as part of the URL",
+                    "default": "{accountName}"
+                },
+                "environment": {
+                    "description": "Environment to use. Used as part of the URL.",
+                    "default": "{environment}"
+                }
+            }
         }
     ],
     "paths": {
-        "/api/dataentities/{data_entity_name}/documents": {
+        "/api/dataentities/{dataEntityName}/documents": {
             "post": {
-                "tags": [
-                    "Documents"
-                ],
+                "tags": ["Documents"],
                 "summary": "Create new document",
-                "description": "",
+                "description": "This request allows you to create a new document corresponding to a given data entity. For example, you can create a new customer profile or address.\r\n\r\n> You can use this request to create documents for any given data entity. Because of this, you are not restricted to using the fields exemplified below in your requests. But you should be aware of the fields allowed or required for each document you wish to create.\r\n\r\n## Example use cases\r\n\r\n### Client profile\r\n\r\nIn order to create a new customer profile, choose the `CL` data entity and send a request similar to this:\r\n\r\nPOST\r\n```\r\nhttps:\/\/examplestore.vtexcommercestable.com.br\/api\/dataentities\/CL\/documents\r\n```\r\n\r\nRequest body\r\n```json\r\n{\r\n    \"email\": \"clark.kent@examplemail.com\",\r\n    \"firstName\": \"Clark\",\r\n    \"lastName\": \"Kent\",\r\n    \"phone\": \"+12025550195\",\r\n    \"documentType\": \"CPF\",\r\n    \"document\": \"12345678900\"\r\n    \"isCorporate\": false,\r\n    \"isNewsletterOptIn\": false,\r\n    \"localeDefault\": \"en-US\"\r\n }\r\n```\r\n\r\n### Client address\r\n\r\nFor a new address, the data entity is `AD` and the request would look like this:\r\n\r\nPOST\r\n```\r\nhttps:\/\/examplestore.vtexcommercestable.com.br\/api\/dataentities\/AD\/documents\r\n```\r\n\r\nRequest body\r\n```json\r\n{\r\n    \"addressName\": \"My House\",\r\n    \"addressType\": \"residential\",\r\n    \"city\": \"Metropolis\",\r\n    \"complement\": \"\",\r\n    \"country\": \"USA\",\r\n    \"postalCode\": \"11375\",\r\n    \"receiverName\": \"Clark Kent\",\r\n    \"reference\": null,\r\n    \"state\": \"MP\",\r\n    \"street\": \"Baker Street\",\r\n    \"neighborhood\": \"Upper east side\",\r\n    \"number\": \"21\",\r\n    \"userId\": \"7e03m794-a33a-11e9-84rt6-0adfa64s5a8e\"\r\n}\r\n```",
                 "operationId": "Createnewdocument",
                 "parameters": [
                     {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
+                        "$ref": "#/components/parameters/Content-Type"
                     },
                     {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
+                        "$ref": "#/components/parameters/Accept"
                     },
                     {
-                        "name": "data_entity_name",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the data entity. Defined by the api",
-                        "schema": {
-                            "type": "string",
-                            "default": "{{data_entity_name}}"
-                        }
+                        "$ref": "#/components/parameters/dataEntityName"
                     },
                     {
-                        "name": "_schema",
-                        "in": "query",
-                        "description": "Name of the schema the document to be created needs to be compliant with",
-                        "required": false,
-                        "style": "form",
-                        "schema": {
-                            "type": "string",
-                            "default": "{{schema}}"
-                        }
-                    },
-                    {
-                        "name": "Accept",
-                        "in": "header",
-                        "description": "HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand",
-                        "required": true,
-                        "style": "simple",
-                        "schema": {
-                            "type": "string",
-                            "default": "application/vnd.vtex.ds.v10+json"
-                        }
+                        "$ref": "#/components/parameters/_schema"
                     }
                 ],
                 "requestBody": {
-                    "description": "Add Key-Value pairs to be sent",
                     "content": {
                         "application/json": {
                             "schema": {
-                                "type": "string",
-                                "format": "json",
-                                "default": "{\n    \"name\": \"Maria\",\n    \"birthDate\": \"1984-02-23\",\n    \"email\": \"maria@email.com\",\n    \"idNumber\": 8241563,\n    \"phoneNumber\": \"+15305816592\",\n    \"receiveNewsletter\": true\n}"
-                            },
-                            "example": {
-                                "Boolean": true,
-                                "Currency": 2.5,
-                                "Date": "1992-11-17",
-                                "Date_Time": "2016-09-14T19:21:01.3163733Z",
-                                "Decimal": 2.5,
-                                "Email": "meu@email.com",
-                                "Integer": 1000000,
-                                "Long": 1000000000,
-                                "Percent": 85.42,
-                                "Time": "23:50",
-                                "URL": "http://www.vtex.com",
-                                "Varchar10": "Lorem ipsu",
-                                "Varchar50": "Lorem ipsum dolor sit amet, consectetur adipiscing",
-                                "Varchar750": "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
-                                "Varchar100": "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
-                                "Relationship": "5eb31afb-7ab0-11e6-94b4-0a44686e393f",
-                                "Text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit..."
+                                "$ref": "#/components/schemas/createUpdateDocumentRequests"
                             }
                         }
                     },
@@ -110,19 +56,14 @@
                 "responses": {
                     "200": {
                         "description": "OK",
-                        "headers": {},
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Createnewdocument"
+                                    "$ref": "#/components/schemas/documentResponse"
                                 },
-                                "examples": {
-                                    "response": {
-                                        "value": {
-                                            "Id": "CL-b818cbda-e489-11e6-94f4-0ac138d2d42e",
-                                            "Href": "http://api.vtex.com/my-store-name/dataentities/CL/documents/b818cbda-e489-11e6-94f4-0ac138d2d42e"
-                                        }
-                                    }
+                                "example": {
+                                    "Id": "CL-b818cbda-e489-11e6-94f4-0ac138d2d42e",
+                                    "Href": "http://api.vtex.com/my-store-name/dataentities/CL/documents/b818cbda-e489-11e6-94f4-0ac138d2d42e"
                                 }
                             }
                         }
@@ -130,181 +71,31 @@
                 },
                 "deprecated": false
             },
-            "put": {
-                "tags": [
-                    "Documents"
-                ],
-                "summary": "Create or update entire document",
-                "description": "",
-                "operationId": "Createorupdateentiredocument",
-                "parameters": [
-                    {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
-                    },
-                    {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
-                    },
-                    {
-                        "name": "data_entity_name",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the data entity",
-                        "schema": {
-                            "type": "string",
-                            "default": "{{data_entity_name}}"
-                        }
-                    },
-                    {
-                        "name": "_schema",
-                        "in": "query",
-                        "description": "Name of the schema that the document to be created or updated needs to be compliant with",
-                        "required": false,
-                        "style": "form",
-                        "schema": {
-                            "type": "string",
-                            "default": "{{schema}}"
-                        }
-                    },
-                    {
-                        "name": "Accept",
-                        "in": "header",
-                        "description": "HTTP Client Negotiation _Accept_ Header Indicates the types of responses the client can understand",
-                        "required": true,
-                        "style": "simple",
-                        "schema": {
-                            "type": "string",
-                            "default": "application/vnd.vtex.ds.v10+json"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "description": "",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "string",
-                                "format": "json",
-                                "default": "{\n    \"name\": \"Maria\",\n    \"birthDate\": \"1984-02-23\",\n    \"email\": \"maria@email.com\",\n    \"idNumber\": 8241563,\n    \"phoneNumber\": \"+15305816592\",\n    \"receiveNewsletter\": true\n}"
-                            },
-                            "example": {
-                                "id": "4e4c55ac-e491-11e6-94f4-0ac138d2d42e",
-                                "Boolean": true,
-                                "Currency": 2.5,
-                                "Date": "1992-11-17",
-                                "Date_Time": "2016-09-14T19:21:01.3163733Z",
-                                "Decimal": 2.5,
-                                "Email": "meu@email.com",
-                                "Integer": 1000000,
-                                "Long": 1000000000,
-                                "Percent": 85.42,
-                                "Time": "23:50",
-                                "URL": "http://www.vtex.com",
-                                "Varchar10": "Lorem ipsu",
-                                "Varchar50": "Lorem ipsum dolor sit amet, consectetur adipiscing",
-                                "Varchar750": "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
-                                "Varchar100": "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
-                                "Relationship": "5eb31afb-7ab0-11e6-94b4-0a44686e393f",
-                                "Text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.... "
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "headers": {}
-                    }
-                },
-                "deprecated": false
-            },
             "patch": {
-                "tags": [
-                    "Documents"
-                ],
-                "summary": "Create or update partial document",
-                "description": "",
+                "tags": ["Documents"],
+                "summary": "Create partial document",
+                "description": "This request allows you to partially update a document corresponding to a given data entity.\r\n\r\n> You can use this request to create documents for any given data entity. Because of this, you are not restricted to using the fields exemplified below in your requests. But you should be aware of the fields allowed or required for each document you wish to update.\r\n\r\n## Example use cases\r\n\r\n### Client profile\r\n\r\nIn order to create a customer profile's `phone` and `isNewsletterOptIn` fields, choose the `CL` data entity and send a request similar to this:\r\n\r\nPATCH\r\n```\r\nhttps:\/\/examplestore.vtexcommercestable.com.br\/api\/dataentities\/CL\/documents\r\n```\r\n\r\nRequest body\r\n```json\r\n{\r\n    \"phone\": \"+12025550195\",\r\n    \"isNewsletterOptIn\": false\r\n }\r\n```\r\n\r\n### Client address\r\n\r\nIn order to update the `receiverName` of an existing address, the data entity is `AD` and the request would look like this:\r\n\r\nPATCH\r\n```\r\nhttps:\/\/examplestore.vtexcommercestable.com.br\/api\/dataentities\/AD\/documents\r\n```\r\n\r\nRequest body\r\n```json\r\n{\r\n    \"receiverName\": \"Lois Lane\"\r\n}\r\n```",
                 "operationId": "Createorupdatepartialdocument",
                 "parameters": [
                     {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
+                        "$ref": "#/components/parameters/dataEntityName"
                     },
                     {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
+                        "$ref": "#/components/parameters/_schema"
                     },
                     {
-                        "name": "data_entity_name",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the data entity",
-                        "schema": {
-                            "type": "string",
-                            "default": "{{data_entity_name}}"
-                        }
+                        "$ref": "#/components/parameters/Content-Type"
                     },
                     {
-                        "name": "_schema",
-                        "in": "query",
-                        "description": "Name of the schema that the document to be created or updated needs to be compliant with",
-                        "required": false,
-                        "style": "form",
-                        "schema": {
-                            "type": "string",
-                            "default": "{{schema}}"
-                        }
-                    },
-                    {
-                        "name": "Accept",
-                        "in": "header",
-                        "description": "HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand ",
-                        "required": true,
-                        "style": "simple",
-                        "schema": {
-                            "type": "string",
-                            "default": "application/vnd.vtex.ds.v10+json"
-                        }
+                        "$ref": "#/components/parameters/Accept"
                     }
                 ],
                 "requestBody": {
-                    "description": "",
+                    "description": "JSON with the fields to be updated.",
                     "content": {
                         "application/json": {
                             "schema": {
-                                "type": "string",
-                                "format": "json",
-                                "default": "{\n    \"name\": \"Maria\",\n    \"birthDate\": \"1984-02-23\",\n    \"email\": \"maria@email.com\",\n    \"idNumber\": 8241563,\n    \"phoneNumber\": \"+15305816592\",\n    \"receiveNewsletter\": true\n}"
-                            },
-                            "example": {
-                                "id": "4e4c55ac-e491-11e6-94f4-0ac138d2d42e",
-                                "Boolean": true
+                                "$ref": "#/components/schemas/createUpdateDocumentRequests"
                             }
                         }
                     },
@@ -312,89 +103,46 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "",
-                        "headers": {}
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/documentResponse"
+                                },
+                                "example": {
+                                    "Id": "CL-b818cbda-e489-11e6-94f4-0ac138d2d42e",
+                                    "Href": "http://api.vtex.com/my-store-name/dataentities/CL/documents/b818cbda-e489-11e6-94f4-0ac138d2d42e"
+                                }
+                            }
+                        }
                     }
                 },
                 "deprecated": false
             }
         },
-        "/api/dataentities/{data_entity_name}/documents/{id}": {
+        "/api/dataentities/{dataEntityName}/documents/{id}": {
             "get": {
-                "tags": [
-                    "Documents"
-                ],
+                "tags": ["Documents"],
                 "summary": "Get document",
-                "description": "",
+                "description": "Get document.",
                 "operationId": "Getdocument",
                 "parameters": [
                     {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
+                        "$ref": "#/components/parameters/dataEntityName"
                     },
                     {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
+                        "$ref": "#/components/parameters/Content-Type"
                     },
                     {
-                        "name": "data_entity_name",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the data entity",
-                        "schema": {
-                            "type": "string",
-                            "default": "{{data_entity_name}}"
-                        }
+                        "$ref": "#/components/parameters/Accept"
                     },
                     {
-                        "name": "Content-Type",
-                        "in": "header",
-                        "description": "Describes the type of the content being sent",
-                        "required": true,
-                        "style": "simple",
-                        "schema": {
-                            "type": "string",
-                            "default": "application/json"
-                        }
-                    },
-                    {
-                        "name": "Accept",
-                        "in": "header",
-                        "description": "HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand ",
-                        "required": true,
-                        "style": "simple",
-                        "schema": {
-                            "type": "string",
-                            "default": "application/vnd.vtex.ds.v10+json"
-                        }
-                    },
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Id of the document",
-                        "required": true,
-                        "style": "simple",
-                        "schema": {
-                            "type": "string",
-                            "default": "{{id}}"
-                        }
+                        "$ref": "#/components/parameters/id"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK",
+                        "description": "Sucessful response",
                         "headers": {},
                         "content": {
                             "application/json": {
@@ -402,14 +150,10 @@
                                     "$ref": "#/components/schemas/Using_fields_all"
                                 },
                                 "example": {
-                                    "response": {
-                                        "value": {
-                                            "id": "b818cbda-e489-11e6-94f4-0ac138d2d42e",
-                                            "accountId": "14af940d-9300-4279-9355-61d44c2ff879",
-                                            "accountName": "my-store-name",
-                                            "dataEntityId": "CL"
-                                        }
-                                    }
+                                    "id": "b818cbda-e489-11e6-94f4-0ac138d2d42e",
+                                    "accountId": "14af940d-9300-4279-9355-61d44c2ff879",
+                                    "accountName": "my-store-name",
+                                    "dataEntityId": "CL"
                                 }
                             }
                         }
@@ -418,115 +162,32 @@
                 "deprecated": false
             },
             "put": {
-                "tags": [
-                    "Documents"
-                ],
+                "tags": ["Documents"],
                 "summary": "Update entire document",
-                "description": "",
+                "description": "Update an existing document corresponding to a given data entity. For example, you can update a customer profile or address.\r\n\r\n> You can use this request to update documents in any given data entity. Because of this, you are not restricted to using the fields exemplified below in your requests. But you should be aware of the fields allowed or required for each document you wish to update.\r\n\r\n## Example use cases\r\n\r\n### Client profile\r\n\r\nIn order to update an existing customer profile, choose the `CL` data entity and send a request similar to this:\r\n\r\nPUT\r\n```\r\nhttps:\/\/examplestore.vtexcommercestable.com.br\/api\/dataentities\/CL\/documents\/123456789abc\r\n```\r\n\r\nRequest body\r\n```json\r\n{\r\n    \"email\": \"clark.kent@examplemail.com\",\r\n    \"firstName\": \"Clark\",\r\n    \"lastName\": \"Kent\",\r\n    \"phone\": \"+12025550195\",\r\n    \"documentType\": \"CPF\",\r\n    \"document\": \"12345678900\"\r\n    \"isCorporate\": false,\r\n    \"isNewsletterOptIn\": false,\r\n    \"localeDefault\": \"en-US\"\r\n }\r\n```\r\n\r\n### Client address\r\n\r\nTo update an address, the data entity is `AD` and the request would look like this:\r\n\r\nPUT\r\n```\r\nhttps:\/\/examplestore.vtexcommercestable.com.br\/api\/dataentities\/AD\/documents\/123456789abc\r\n```\r\n\r\nRequest body\r\n```json\r\n{\r\n    \"addressName\": \"My House\",\r\n    \"addressType\": \"residential\",\r\n    \"city\": \"Metropolis\",\r\n    \"complement\": \"\",\r\n    \"country\": \"USA\",\r\n    \"postalCode\": \"11375\",\r\n    \"receiverName\": \"Clark Kent\",\r\n    \"reference\": null,\r\n    \"state\": \"MP\",\r\n    \"street\": \"Baker Street\",\r\n    \"neighborhood\": \"Upper east side\",\r\n    \"number\": \"21\",\r\n    \"userId\": \"7e03m794-a33a-11e9-84rt6-0adfa64s5a8e\"\r\n}\r\n```",
                 "operationId": "Updateentiredocument",
                 "parameters": [
                     {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
+                        "$ref": "#/components/parameters/dataEntityName"
                     },
                     {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
+                        "$ref": "#/components/parameters/_where"
                     },
                     {
-                        "name": "data_entity_name",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the data entity",
-                        "schema": {
-                            "type": "string",
-                            "default": "{{data_entity_name}}"
-                        }
+                        "$ref": "#/components/parameters/_schema"
                     },
                     {
-                        "name": "_where",
-                        "in": "query",
-                        "description": "Specification of filters. As seen below",
-                        "required": false,
-                        "style": "form",
-                        "schema": {
-                            "type": "string",
-                            "default": "firstName is not null"
-                        }
+                        "$ref": "#/components/parameters/Accept"
                     },
                     {
-                        "name": "_schema",
-                        "in": "query",
-                        "description": "Name of the schema that the document to be updated needs to be compliant with",
-                        "required": false,
-                        "style": "form",
-                        "schema": {
-                            "type": "string",
-                            "default": "{{schema}}"
-                        }
-                    },
-                    {
-                        "name": "Accept",
-                        "in": "header",
-                        "description": "HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand ",
-                        "required": true,
-                        "style": "simple",
-                        "schema": {
-                            "type": "string",
-                            "default": "application/vnd.vtex.ds.v10+json"
-                        }
-                    },
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Id of the document",
-                        "required": true,
-                        "style": "simple",
-                        "schema": {
-                            "type": "string",
-                            "default": "{{id}}"
-                        }
+                        "$ref": "#/components/parameters/id"
                     }
                 ],
                 "requestBody": {
-                    "description": "",
                     "content": {
                         "application/json": {
                             "schema": {
-                                "type": "string",
-                                "format": "json",
-                                "default": "{\n    \"name\": \"Maria\",\n    \"birthDate\": \"1984-02-23\",\n    \"email\": \"maria@email.com\",\n    \"idNumber\": 8241563,\n    \"phoneNumber\": \"+15305816592\",\n    \"receiveNewsletter\": true\n}"
-                            },
-                            "example": {
-                                "Boolean": true,
-                                "Currency": 2.5,
-                                "Date": "1992-11-17",
-                                "Date_Time": "2016-09-14T19:21:01.3163733Z",
-                                "Decimal": 2.5,
-                                "Email": "meu@email.com",
-                                "Integer": 1000000,
-                                "Long": 1000000000,
-                                "Percent": 85.42,
-                                "Time": "23:50",
-                                "URL": "http://www.vtex.com",
-                                "Varchar10": "Lorem ipsu",
-                                "Varchar50": "Lorem ipsum dolor sit amet, consectetur adipiscing",
-                                "Varchar750": "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
-                                "Varchar100": "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
-                                "Relationship": "5eb31afb-7ab0-11e6-94b4-0a44686e393f",
-                                "Text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit..."
+                                "$ref": "#/components/schemas/createUpdateDocumentRequests"
                             }
                         }
                     },
@@ -534,106 +195,49 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "",
-                        "headers": {}
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/documentResponse"
+                                },
+                                "example": {
+                                    "Id": "CL-b818cbda-e489-11e6-94f4-0ac138d2d42e",
+                                    "Href": "http://api.vtex.com/my-store-name/dataentities/CL/documents/b818cbda-e489-11e6-94f4-0ac138d2d42e"
+                                }
+                            }
+                        }
                     }
                 },
                 "deprecated": false
             },
             "patch": {
-                "tags": [
-                    "Documents"
-                ],
+                "tags": ["Documents"],
                 "summary": "Update partial document",
-                "description": "",
+                "description": "This request allows you to partially update a document corresponding to a given data entity. For example, you can update some fields of a customer profile or address.\r\n\r\n> You can use this request to update documents for any given data entity. Because of this, you are not restricted to using the fields exemplified below in your requests. But you should be aware of the fields allowed or required for each document you wish to update.\r\n\r\n## Example use cases\r\n\r\n### Client profile\r\n\r\nIn order to update a customer profile's `phone` and `isNewsletterOptIn` fields, choose the `CL` data entity and send a request similar to this:\r\n\r\nPATCH\r\n```\r\nhttps:\/\/examplestore.vtexcommercestable.com.br\/api\/dataentities\/CL\/documents\/123456789abc\r\n```\r\n\r\nRequest body\r\n```json\r\n{\r\n    \"phone\": \"+12025550195\",\r\n    \"isNewsletterOptIn\": false\r\n }\r\n```\r\n\r\n### Client address\r\n\r\nIn order to update the `receiverName` of an existing address, the data entity is `AD` and the request would look like this:\r\n\r\nPATCH\r\n```\r\nhttps:\/\/examplestore.vtexcommercestable.com.br\/api\/dataentities\/AD\/documents\/123456789abc\r\n```\r\n\r\nRequest body\r\n```json\r\n{\r\n    \"receiverName\": \"Lois Lane\"\r\n}\r\n```",
                 "operationId": "Updatepartialdocument",
                 "parameters": [
                     {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
+                        "$ref": "#/components/parameters/dataEntityName"
                     },
                     {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
+                        "$ref": "#/components/parameters/_where"
                     },
                     {
-                        "name": "data_entity_name",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the data entity",
-                        "schema": {
-                            "type": "string",
-                            "default": "{{data_entity_name}}"
-                        }
+                        "$ref": "#/components/parameters/_schema"
                     },
                     {
-                        "name": "_where",
-                        "in": "query",
-                        "description": "Specification of filters. As seen below",
-                        "required": false,
-                        "style": "form",
-                        "schema": {
-                            "type": "string",
-                            "default": "firstName is not null"
-                        }
+                        "$ref": "#/components/parameters/Accept"
                     },
                     {
-                        "name": "_schema",
-                        "in": "query",
-                        "description": "Name of the schema that the document to be updated needs to be compliant with",
-                        "required": false,
-                        "style": "form",
-                        "schema": {
-                            "type": "string",
-                            "default": "{{schema}}"
-                        }
-                    },
-                    {
-                        "name": "Accept",
-                        "in": "header",
-                        "description": "HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand ",
-                        "required": true,
-                        "style": "simple",
-                        "schema": {
-                            "type": "string",
-                            "default": "application/vnd.vtex.ds.v10+json"
-                        }
-                    },
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Id of the Document",
-                        "required": true,
-                        "style": "simple",
-                        "schema": {
-                            "type": "string",
-                            "default": "{{id}}"
-                        }
+                        "$ref": "#/components/parameters/id"
                     }
                 ],
                 "requestBody": {
-                    "description": "",
                     "content": {
                         "application/json": {
                             "schema": {
-                                "type": "string",
-                                "format": "json",
-                                "default": "{\n    \"name\": \"Maria\",\n    \"birthDate\": \"1984-02-23\",\n    \"email\": \"maria@email.com\",\n    \"idNumber\": 8241563,\n    \"phoneNumber\": \"+15305816592\",\n    \"receiveNewsletter\": true\n}"
-                            },
-                            "example": {
-                                "Boolean": false
+                                "$ref": "#/components/schemas/createUpdateDocumentRequests"
                             }
                         }
                     },
@@ -641,483 +245,203 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "",
-                        "headers": {}
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/documentResponse"
+                                },
+                                "example": {
+                                    "Id": "CL-b818cbda-e489-11e6-94f4-0ac138d2d42e",
+                                    "Href": "http://api.vtex.com/my-store-name/dataentities/CL/documents/b818cbda-e489-11e6-94f4-0ac138d2d42e"
+                                }
+                            }
+                        }
                     }
                 },
                 "deprecated": false
             },
             "delete": {
-                "tags": [
-                    "Documents"
-                ],
+                "tags": ["Documents"],
                 "summary": "Delete document",
                 "description": "It allows to delete a document.",
                 "operationId": "Deletedocument",
                 "parameters": [
                     {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
+                        "$ref": "#/components/parameters/dataEntityName"
                     },
                     {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
+                        "$ref": "#/components/parameters/Content-Type"
                     },
                     {
-                        "name": "data_entity_name",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the data entity",
-                        "schema": {
-                            "type": "string",
-                            "default": "{{data_entity_name}}"
-                        }
+                        "$ref": "#/components/parameters/Accept"
                     },
                     {
-                        "name": "Content-Type",
-                        "in": "header",
-                        "description": "Type of the content being sent",
-                        "required": true,
-                        "style": "simple",
-                        "schema": {
-                            "type": "string",
-                            "default": "application/json"
-                        }
-                    },
-                    {
-                        "name": "Accept",
-                        "in": "header",
-                        "description": "HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand ",
-                        "required": true,
-                        "style": "simple",
-                        "schema": {
-                            "type": "string",
-                            "default": "application/vnd.vtex.ds.v10+json"
-                        }
-                    },
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Id of the Document",
-                        "required": true,
-                        "style": "simple",
-                        "schema": {
-                            "type": "string",
-                            "default": "{{id}}"
-                        }
+                        "$ref": "#/components/parameters/id"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "",
+                        "description": "OK",
                         "headers": {}
                     }
                 },
                 "deprecated": false
             }
         },
-        "/api/dataentities/{data_entity_name}/search": {
+        "/api/dataentities/{dataEntityName}/search": {
             "get": {
-                "tags": [
-                    "Search"
-                ],
+                "tags": ["Search"],
                 "summary": "Search documents",
-                "description": "",
+                "description": "Retrieve documents' information, while choosing which fields will be returned and filtering documents by specific fields.\r\n\r\nBelow you can see some query examples and learn more about each query parameter.\r\n\r\n## Query Examples\r\n\r\n### Simple filter\r\n\r\n```\r\n\/dataentities\/CL\/search?email=my@email.com\r\n```\r\n\r\n### Complex filter\r\n\r\n```\r\n\/dataentities\/CL\/search?_where=(firstName=Jon OR lastName=Smith) OR (createdIn between 2001-01-01 AND 2016-01-01)\r\n```\r\n\r\n### Date Range\r\n\r\n```\r\n\/dataentities\/CL\/search?_where=createdIn between 2001-01-01 AND 2016-01-01\r\n```\r\n\r\n### Range numeric fields\r\n\r\n```\r\n\/dataentities\/CL\/search?_where=age between 18 AND 25\r\n```\r\n\r\n### Partial filter\r\n\r\n```\r\n\/dataentities\/CL\/search?firstName=*Maria*\r\n```\r\n\r\n### Filter for null values\r\n\r\n```\r\n\/dataentities\/CL\/search?_where=firstName is null\r\n```\r\n\r\n### Filter for non-null values\r\n\r\n```\r\n\/dataentities\/CL\/search?_where=firstName is not null\r\n```\r\n\r\n### Filter for difference\r\n```\r\n\/dataentities\/CL\/search?_where=firstName<>maria\r\n```\r\n\r\n### Filter greater than or less than\r\n```\r\n\/dataentities\/CL\/search?_where=number>5\r\n\/dataentities\/CL\/search?_where=date<2001-01-01\r\n```",
                 "operationId": "Searchdocuments",
                 "parameters": [
                     {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
+                        "$ref": "#/components/parameters/dataEntityName"
                     },
                     {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
+                        "$ref": "#/components/parameters/Content-Type"
                     },
                     {
-                        "name": "data_entity_name",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the data entity",
-                        "schema": {
-                            "type": "string",
-                            "default": "{{data_entity_name}}"
-                        }
+                        "$ref": "#/components/parameters/Accept"
                     },
                     {
-                        "name": "Content-Type",
-                        "in": "header",
-                        "description": "Type of the content being sent",
-                        "required": true,
-                        "style": "simple",
-                        "schema": {
-                            "type": "string",
-                            "default": "application/json"
-                        }
+                        "$ref": "#/components/parameters/REST-Range"
                     },
                     {
-                        "name": "Accept",
-                        "in": "header",
-                        "description": "HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand ",
-                        "required": true,
-                        "style": "simple",
-                        "schema": {
-                            "type": "string",
-                            "default": "application/vnd.vtex.ds.v10+json"
-                        }
+                        "$ref": "#/components/parameters/_fields"
                     },
                     {
-                        "name": "REST-Range",
-                        "in": "header",
-                        "description": "Defines the collection of documents to be returned. A range within the collection limited by 100 documents per query.",
-                        "required": true,
-                        "style": "simple",
-                        "schema": {
-                            "type": "string",
-                            "default": "resources=0-10"
-                        }
+                        "$ref": "#/components/parameters/_where"
                     },
                     {
-                        "name": "_fields",
-                        "in": "query",
-                        "description": "Fields that will be returned by document",
-                        "required": false,
-                        "style": "form",
-                        "schema": {
-                            "type": "string",
-                            "default": "email,firstName,document"
-                        }
+                        "$ref": "#/components/parameters/_schema"
                     },
                     {
-                        "name": "_where",
-                        "in": "query",
-                        "description": "Specification of filters. As seen below",
-                        "required": false,
-                        "style": "form",
-                        "schema": {
-                            "type": "string",
-                            "default": "firstName is not null"
-                        }
+                        "$ref": "#/components/parameters/_keyword"
                     },
                     {
-                        "name": "_schema",
-                        "in": "query",
-                        "description": "Enter with the name of the schema to filter documents by compatibility of the schema.",
-                        "required": false,
-                        "style": "form",
-                        "schema": {
-                            "type": "string",
-                            "default": "{{data_entity_name}}"
-                        }
-                    },
-                    {
-                        "name": "_keyword",
-                        "in": "query",
-                        "description": "String to search",
-                        "required": false,
-                        "style": "form",
-                        "schema": {
-                            "type": "string",
-                            "default": "String to search"
-                        }
-                    },
-                    {
-                        "name": "_sort",
-                        "in": "query",
-                        "description": "Use ASC value to sort ascending or DESC value to sort descending. ",
-                        "required": false,
-                        "style": "form",
-                        "schema": {
-                            "type": "string",
-                            "default": "firstName ASC"
-                        }
+                        "$ref": "#/components/parameters/_sort"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "",
-                        "headers": {}
+                        "description": "OK"
                     }
                 },
                 "deprecated": false
             }
         },
-        "/api/dataentities/{data_entity_name}/scroll": {
+        "/api/dataentities/{dataEntityName}/scroll": {
             "get": {
-                "tags": [
-                    "Scroll"
-                ],
+                "tags": ["Scroll"],
                 "summary": "Scroll documents",
-                "description": "",
+                "description": "In the first request, the `X-VTEX-MD-TOKEN` token will be returned in the header. This token must be passed to the next request in the query string `_token` parameter. The token has a timeout of 10 minutes, which refreshes after each request.\r\n\r\nAfter the token is obtained it is no longer necessary to send the filter or document size per page parameters. You only need to resend the token until the document collection is empty.\r\n\r\n## Request examples\r\n\r\nFirst request:\r\n```\r\n\/dataentities\/CL\/scroll?isCluster=true&_size=250&_fields=email,firstName\r\n```\r\n\r\nRetrieve the token in the header `X-VTEX-MD-TOKEN` from the first request's response and use it to make the next requests.\r\n\r\nSubsequent requests:\r\n```\r\n\/dataentities\/CL\/scroll?_token={tokenValueExample}\r\n```",
                 "operationId": "Scrolldocuments",
                 "parameters": [
                     {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
+                        "$ref": "#/components/parameters/dataEntityName"
                     },
                     {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
+                        "$ref": "#/components/parameters/Content-Type"
                     },
                     {
-                        "name": "data_entity_name",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the data entity",
-                        "schema": {
-                            "type": "string",
-                            "default": "{{data_entity_name}}"
-                        }
+                        "$ref": "#/components/parameters/Accept"
                     },
                     {
-                        "name": "Content-Type",
-                        "in": "header",
-                        "description": "Type of the content being sent",
-                        "required": true,
-                        "style": "simple",
-                        "schema": {
-                            "type": "string",
-                            "default": "application/json"
-                        }
+                        "$ref": "#/components/parameters/_token"
                     },
                     {
-                        "name": "Accept",
-                        "in": "header",
-                        "description": "HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand ",
-                        "required": true,
-                        "style": "simple",
-                        "schema": {
-                            "type": "string",
-                            "default": "application/vnd.vtex.ds.v10+json"
-                        }
+                        "$ref": "#/components/parameters/REST-Range"
+                    },
+                    {
+                        "$ref": "#/components/parameters/_fields"
+                    },
+                    {
+                        "$ref": "#/components/parameters/_where"
+                    },
+                    {
+                        "$ref": "#/components/parameters/_schema"
+                    },
+                    {
+                        "$ref": "#/components/parameters/_keyword"
+                    },
+                    {
+                        "$ref": "#/components/parameters/_sort"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "",
+                        "description": "OK",
                         "headers": {}
                     }
                 },
                 "deprecated": false
             }
         },
-        "/api/dataentities/{data_entity_name}/schemas": {
+        "/api/dataentities/{dataEntityName}/schemas": {
             "get": {
-                "tags": [
-                    "Schemas"
-                ],
+                "tags": ["Schemas"],
                 "summary": "Get schemas",
                 "description": "Return the schemas saved.",
                 "operationId": "Getschemas",
                 "parameters": [
                     {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
+                        "$ref": "#/components/parameters/dataEntityName"
                     },
                     {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
-                    },
-                    {
-                        "name": "data_entity_name",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the data entity",
-                        "schema": {
-                            "type": "string",
-                            "default": "{{data_entity_name}}"
-                        }
-                    },
-                    {
-                        "name": "Content-Type",
-                        "in": "header",
-                        "description": "Type of the content being sent",
-                        "required": true,
-                        "style": "simple",
-                        "schema": {
-                            "type": "string",
-                            "default": "application/json"
-                        }
+                        "$ref": "#/components/parameters/Content-Type"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "",
+                        "description": "OK",
                         "headers": {}
                     }
                 },
                 "deprecated": false
             }
         },
-        "/api/dataentities/{data_entity_name}/schemas/{schema_name}": {
+        "/api/dataentities/{dataEntityName}/schemas/{schema_name}": {
             "get": {
-                "tags": [
-                    "Schemas"
-                ],
+                "tags": ["Schemas"],
                 "summary": "Get schema by name",
-                "description": "Return the schema saved.",
+                "description": "Returns the schema saved.",
                 "operationId": "Getschemabyname",
                 "parameters": [
                     {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
+                        "$ref": "#/components/parameters/dataEntityName"
                     },
                     {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
+                        "$ref": "#/components/parameters/Content-Type"
                     },
                     {
-                        "name": "data_entity_name",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the data entity",
-                        "schema": {
-                            "type": "string",
-                            "default": "{{data_entity_name}}"
-                        }
-                    },
-                    {
-                        "name": "Content-Type",
-                        "in": "header",
-                        "description": "Type of the content being sent",
-                        "required": true,
-                        "style": "simple",
-                        "schema": {
-                            "type": "string",
-                            "default": "application/json"
-                        }
-                    },
-                    {
-                        "name": "schema_name",
-                        "in": "path",
-                        "description": "Name of the schema",
-                        "required": true,
-                        "style": "simple",
-                        "schema": {
-                            "type": "string",
-                            "default": "{{schema}}"
-                        }
+                        "$ref": "#/components/parameters/schema_name"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "",
+                        "description": "OK",
                         "headers": {}
                     }
                 },
                 "deprecated": false
             },
             "put": {
-                "tags": [
-                    "Schemas"
-                ],
+                "tags": ["Schemas"],
                 "summary": "Save schema by name",
                 "description": "Save the schema.",
                 "operationId": "Saveschemabyname",
                 "parameters": [
                     {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
+                        "$ref": "#/components/parameters/dataEntityName"
                     },
                     {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
-                    },
-                    {
-                        "name": "data_entity_name",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the data entity",
-                        "schema": {
-                            "type": "string",
-                            "default": "{{data_entity_name}}"
-                        }
-                    },
-                    {
-                        "name": "schema_name",
-                        "in": "path",
-                        "description": "Name of the schema",
-                        "required": true,
-                        "style": "simple",
-                        "schema": {
-                            "type": "string",
-                            "default": "{{schema}}"
-                        }
+                        "$ref": "#/components/parameters/schema_name"
                     }
                 ],
                 "requestBody": {
-                    "description": "",
+                    "description": "Request body for saving schema",
                     "content": {
                         "application/json": {
                             "schema": {
@@ -1136,100 +460,54 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "",
+                        "description": "OK",
                         "headers": {}
                     }
                 },
                 "deprecated": false
             }
         },
-        "/api/dataentities/{data_entity_name}/indices": {
+        "/api/dataentities/{dataEntityName}/indices": {
             "get": {
-                "tags": [
-                    "Indices"
-                ],
+                "tags": ["Indices"],
                 "summary": "Get indices",
-                "description": "Return the list of indices by data entity.",
+                "description": "Returns the list of indices by data entity.",
                 "operationId": "Getindices",
                 "parameters": [
                     {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
+                        "$ref": "#/components/parameters/dataEntityName"
                     },
                     {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
-                    },
-                    {
-                        "name": "data_entity_name",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the data entity",
-                        "schema": {
-                            "type": "string",
-                            "default": "{{data_entity_name}}"
-                        }
-                    },
-                    {
-                        "name": "Content-Type",
-                        "in": "header",
-                        "description": "Type of the content being sent",
-                        "required": true,
-                        "style": "simple",
-                        "schema": {
-                            "type": "string",
-                            "default": "application/json"
-                        }
+                        "$ref": "#/components/parameters/Content-Type"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "",
+                        "description": "OK",
                         "headers": {}
                     }
                 },
                 "deprecated": false
             },
             "put": {
-                "tags": [
-                    "Indices"
-                ],
+                "tags": ["Indices"],
                 "summary": "Put indices",
-                "description": "Create an indice.",
+                "description": "Create an index.",
                 "operationId": "Putindices",
                 "parameters": [
                     {
-                        "name": "data_entity_name",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the data entity",
-                        "schema": {
-                            "type": "string",
-                            "default": "{{data_entity_name}}"
-                        }
+                        "$ref": "#/components/parameters/dataEntityName"
                     }
                 ],
                 "requestBody": {
-                    "description": "",
+                    "description": "Request body for creating an index",
                     "content": {
                         "application/json": {
                             "schema": {
                                 "$ref": "#/components/schemas/PutindicesRequest"
                             },
                             "example": {
-                                "name": "indiceName",
+                                "name": "indexName",
                                 "multiple": false,
                                 "fields": "fieldName"
                             }
@@ -1239,148 +517,82 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "",
+                        "description": "OK",
                         "headers": {}
                     }
                 },
                 "deprecated": false
             }
         },
-        "/api/dataentities/{data_entity_name}/indices/{indice_name}": {
+        "/api/dataentities/{dataEntityName}/indices/{index_name}": {
             "get": {
-                "tags": [
-                    "Indices"
-                ],
-                "summary": "Get indice by name",
-                "description": "Return an indice.",
-                "operationId": "Getindicebyname",
+                "tags": ["Indices"],
+                "summary": "Get index by name",
+                "description": "Returns an index.",
+                "operationId": "Getindexbyname",
                 "parameters": [
                     {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
+                        "$ref": "#/components/parameters/dataEntityName"
                     },
                     {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
+                        "$ref": "#/components/parameters/Content-Type"
                     },
                     {
-                        "name": "data_entity_name",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the data entity",
-                        "schema": {
-                            "type": "string",
-                            "default": "{{data_entity_name}}"
-                        }
-                    },
-                    {
-                        "name": "Content-Type",
-                        "in": "header",
-                        "description": "Type of the content being sent",
-                        "required": true,
-                        "style": "simple",
-                        "schema": {
-                            "type": "string",
-                            "default": "application/json"
-                        }
-                    },
-                    {
-                        "name": "indice_name",
-                        "in": "path",
-                        "description": "Name of the indice",
-                        "required": true,
-                        "style": "simple",
-                        "schema": {
-                            "type": "string",
-                            "default": "{{indice_name}}"
-                        }
+                        "$ref": "#/components/parameters/index_name"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "",
+                        "description": "OK",
+                        "headers": {}
+                    }
+                },
+                "deprecated": false
+            },
+            "delete": {
+                "tags": ["Indices"],
+                "summary": "Delete index by name",
+                "description": "Delete an index.",
+                "operationId": "Deleteindexbyname",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/dataEntityName"
+                    },
+                    {
+                        "$ref": "#/components/parameters/Content-Type"
+                    },
+                    {
+                        "$ref": "#/components/parameters/index_name"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
                         "headers": {}
                     }
                 },
                 "deprecated": false
             }
         },
-        "/api/dataentities/{data_entity_name}/documents/{id}/clusters": {
+        "/api/dataentities/{dataEntityName}/documents/{id}/clusters": {
             "post": {
-                "tags": [
-                    "Clusters"
-                ],
+                "tags": ["Clusters"],
                 "summary": "Validate document by clusters",
-                "description": "",
+                "description": "Validates document by clusters.",
                 "operationId": "Validatedocumentbyclusters",
                 "parameters": [
                     {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
+                        "$ref": "#/components/parameters/dataEntityName"
                     },
                     {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
+                        "$ref": "#/components/parameters/Accept"
                     },
                     {
-                        "name": "data_entity_name",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the data entity",
-                        "schema": {
-                            "type": "string",
-                            "default": "{{data_entity_name}}"
-                        }
-                    },
-                    {
-                        "name": "Accept",
-                        "in": "header",
-                        "description": "HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand ",
-                        "required": true,
-                        "style": "simple",
-                        "schema": {
-                            "type": "string",
-                            "default": "application/vnd.vtex.ds.v10+json"
-                        }
-                    },
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Id of the Document",
-                        "required": true,
-                        "style": "simple",
-                        "schema": {
-                            "type": "string",
-                            "default": "{{id}}"
-                        }
+                        "$ref": "#/components/parameters/id"
                     }
                 ],
                 "requestBody": {
-                    "description": "",
+                    "description": "Request body for validating a document by clusters",
                     "content": {
                         "application/json": {
                             "schema": {
@@ -1388,113 +600,63 @@
                                 "format": "json",
                                 "default": "[\n    {\n        \"name\": \"male\",        \n        \"rule\": \"gender=male\"\n    },\n    {\n        \"name\": \"complex\",\n        \"rule\": \"((gender=male AND percent=0.35) AND any is null) AND (name=*go*)\"\n    },    \n    {\n        \"name\": \"complex2\",\n        \"rule\": \"((gender=male AND percent=0.35) AND any is not null) OR (name=*go*)\"\n    },\n    {\n        \"name\": \"createdIn\",\n        \"rule\": \"createdIn between 2015-10-28 AND 2015-10-30\"\n    }\n]"
                             },
-                            "example": [
-                                {
-                                    "name": "male",
-                                    "rule": "gender=male"
-                                },
-                                {
-                                    "name": "complex",
-                                    "rule": "((gender=male AND percent=0.35) AND any is null) AND (name=*go*)"
-                                },
-                                {
-                                    "name": "complex2",
-                                    "rule": "((gender=male AND percent=0.35) AND any is not null) OR (name=*go*)"
-                                },
-                                {
-                                    "name": "createdIn",
-                                    "rule": "createdIn between 2015-10-28 AND 2015-10-30"
-                                }
-                            ]
+                            "example": "[\n    {\n        \"name\": \"male\",        \n        \"rule\": \"gender=male\"\n    },\n    {\n        \"name\": \"complex\",\n        \"rule\": \"((gender=male AND percent=0.35) AND any is null) AND (name=*go*)\"\n    },    \n    {\n        \"name\": \"complex2\",\n        \"rule\": \"((gender=male AND percent=0.35) AND any is not null) OR (name=*go*)\"\n    },\n    {\n        \"name\": \"createdIn\",\n        \"rule\": \"createdIn between 2015-10-28 AND 2015-10-30\"\n    }\n]"
                         }
                     },
                     "required": true
                 },
                 "responses": {
                     "200": {
-                        "description": "",
+                        "description": "OK",
                         "headers": {}
                     }
                 },
                 "deprecated": false
             }
         },
-        "/api/dataentities/{data_entity_name}/documents/{id}/versions": {
+        "/api/dataentities/{dataEntityName}/documents/{id}/versions": {
             "get": {
-                "tags": [
-                    "Versions"
-                ],
+                "tags": ["Versions"],
                 "summary": "List versions",
                 "description": "Allows to list the versions of a document.",
                 "operationId": "Listversions",
                 "parameters": [
                     {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
+                        "$ref": "#/components/parameters/dataEntityName"
+                    },
+                    {
+                        "$ref": "#/components/parameters/Content-Type"
+                    },
+                    {
+                        "$ref": "#/components/parameters/Accept"
+                    },
+                    {
+                        "$ref": "#/components/parameters/id"
+                    },
+                    {
+                        "name": "load",
+                        "in": "query",
+                        "description": "If true, return all the fields in each version of the document",
+                        "required": false,
                         "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
+                            "type": "boolean",
+                            "default": true
                         }
                     },
                     {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
+                        "name": "fields",
+                        "in": "query",
+                        "description": "If `load` is true, the response will return only these specific fields",
+                        "required": false,
                         "schema": {
                             "type": "string",
-                            "default": "vtexcommercestable"
-                        }
-                    },
-                    {
-                        "name": "data_entity_name",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the data entity",
-                        "schema": {
-                            "type": "string",
-                            "default": "{{data_entity_name}}"
-                        }
-                    },
-                    {
-                        "name": "Content-Type",
-                        "in": "header",
-                        "description": "Type of the content being sent",
-                        "required": true,
-                        "style": "simple",
-                        "schema": {
-                            "type": "string",
-                            "default": "application/json"
-                        }
-                    },
-                    {
-                        "name": "Accept",
-                        "in": "header",
-                        "description": "HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand ",
-                        "required": true,
-                        "style": "simple",
-                        "schema": {
-                            "type": "string",
-                            "default": "application/vnd.vtex.ds.v10+json"
-                        }
-                    },
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Id of the Document",
-                        "required": true,
-                        "style": "simple",
-                        "schema": {
-                            "type": "string",
-                            "default": "{{id}}"
+                            "default": "id,dataEntityId,isNewsletterOptIn,createdBy"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "",
+                        "description": "OK",
                         "headers": {},
                         "content": {
                             "application/json": {
@@ -1504,24 +666,28 @@
                                         "$ref": "#/components/schemas/Listversion"
                                     }
                                 },
-                                "examples": {
-                                    "response": {
-                                        "value": [
-                                            {
-                                                "id": "_EAR0cJ7XB5k5grnmm0zeKGlVvVM9WCPV_",
-                                                "date": "2016-10-18T16:53:32+00:00"
-                                            },
-                                            {
-                                                "id": "_E5SH9WXVvhPBNnbQtYAAGqrIysIeNYhy_",
-                                                "date": "2016-09-08T20:11:42+00:00"
-                                            },
-                                            {
-                                                "id": "_cwVfOG7S6XeAiDBhNpLiJM1cwRiJcvdp_",
-                                                "date": "2016-07-14T00:36:36+00:00"
-                                            }
-                                        ]
+                                "example": [
+                                    {
+                                        "id": "_EAR0cJ7XB5k5grnmm0zeKGlVvVM9WCPy_",
+                                        "date": "2016-10-18T16:53:32+00:00",
+                                        "document": {
+                                            "id": "72e7f8dd-1168-23ec-82ac-0e2b61663eb4",
+                                            "dataEntityId": "CL",
+                                            "isNewsletterOptIn": true,
+                                            "createdBy": "81fc8b10-25b7-48de-b425-7b93554002cc"
+                                        }
+                                    },
+                                    {
+                                        "id": "_E5SH9WXVvhPBNnbQtYAAGqrIysIeNYhV_",
+                                        "date": "2016-09-08T20:11:42+00:00",
+                                        "document": {
+                                            "id": "72e7f8dd-1168-23ec-82ac-0e2b61663eb4",
+                                            "dataEntityId": "CL",
+                                            "isNewsletterOptIn": true,
+                                            "createdBy": "81fc8b10-25b7-48de-b425-7b93554002cc"
+                                        }
                                     }
-                                }
+                                ]
                             }
                         }
                     }
@@ -1529,127 +695,62 @@
                 "deprecated": false
             }
         },
-        "/api/dataentities/{data_entity_name}/documents/{id}/versions/{versionId}": {
+        "/api/dataentities/{dataEntityName}/documents/{id}/versions/{versionId}": {
             "get": {
-                "tags": [
-                    "Versions"
-                ],
+                "tags": ["Versions"],
                 "summary": "Get version",
                 "description": "Returns the version of a document.",
                 "operationId": "Getversion",
                 "parameters": [
                     {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
+                        "$ref": "#/components/parameters/dataEntityName"
                     },
                     {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
+                        "$ref": "#/components/parameters/Content-Type"
                     },
                     {
-                        "name": "data_entity_name",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the data entity",
-                        "schema": {
-                            "type": "string",
-                            "default": "{{data_entity_name}}"
-                        }
+                        "$ref": "#/components/parameters/Accept"
                     },
                     {
-                        "name": "Content-Type",
-                        "in": "header",
-                        "description": "Type of the content being sent",
-                        "required": true,
-                        "style": "simple",
-                        "schema": {
-                            "type": "string",
-                            "default": "application/json"
-                        }
+                        "$ref": "#/components/parameters/id"
                     },
                     {
-                        "name": "Accept",
-                        "in": "header",
-                        "description": "HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand ",
-                        "required": true,
-                        "style": "simple",
-                        "schema": {
-                            "type": "string",
-                            "default": "application/vnd.vtex.ds.v10+json"
-                        }
-                    },
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Id of the Document",
-                        "required": true,
-                        "style": "simple",
-                        "schema": {
-                            "type": "string",
-                            "default": "{{id}}"
-                        }
-                    },
-                    {
-                        "name": "versionId",
-                        "in": "path",
-                        "description": "Id of the version to get",
-                        "required": true,
-                        "style": "simple",
-                        "schema": {
-                            "type": "string",
-                            "default": "{{versionId}}"
-                        }
+                        "$ref": "#/components/parameters/versionId"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "",
+                        "description": "OK",
                         "headers": {},
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/Getversion"
                                 },
-                                "examples": {
-                                    "response": {
-                                        "value": {
-                                            "id": "version-id",
-                                            "author": "user-id",
-                                            "document": {
-                                                "id": "my-id",
-                                                "dataEntityId": "CL",
-                                                "accountId": "my-account-id",
-                                                "accountName": "my-account",
-                                                "followers": [],
-                                                "email": "teste@mail.com",
-                                                "rclastsession": "163054c0-954f-11e6-891e-4d2b1c3450a4",
-                                                "rclastsessiondate": "2016-10-18T16:53:00",
-                                                "checkouttag": null,
-                                                "carttag": null,
-                                                "departmentVisitedTag": {
-                                                    "DisplayValue": "Ar e Ventilação",
-                                                    "Scores": {
-                                                        "Ar e Ventilação": [
-                                                            {
-                                                                "Point": 1,
-                                                                "Date": "2016-10-18T16:53:31.0842607Z",
-                                                                "Until": "2017-04-16T16:53:31.0842607Z"
-                                                            }
-                                                        ]
+                                "example": {
+                                    "id": "version-id",
+                                    "author": "user-id",
+                                    "document": {
+                                        "id": "my-id",
+                                        "dataEntityId": "CL",
+                                        "accountId": "my-account-id",
+                                        "accountName": "my-account",
+                                        "followers": [],
+                                        "email": "teste@mail.com",
+                                        "rclastsession": "163054c0-954f-11e6-891e-4d2b1c3450a4",
+                                        "rclastsessiondate": "2016-10-18T16:53:00",
+                                        "checkouttag": null,
+                                        "carttag": null,
+                                        "departmentVisitedTag": {
+                                            "DisplayValue": "Ar e Ventilação",
+                                            "Scores": {
+                                                "Ar e Ventilação": [
+                                                    {
+                                                        "Point": 1,
+                                                        "Date": "2016-10-18T16:53:31.0842607Z",
+                                                        "Until": "2017-04-16T16:53:31.0842607Z"
                                                     }
-                                                }
+                                                ]
                                             }
                                         }
                                     }
@@ -1661,80 +762,27 @@
                 "deprecated": false
             },
             "put": {
-                "tags": [
-                    "Versions"
-                ],
+                "tags": ["Versions"],
                 "summary": "Put version",
                 "description": "Updates document with version values.",
                 "operationId": "Putversion",
                 "parameters": [
                     {
-                        "name": "accountName",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the VTEX account. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "apiexamples"
-                        }
+                        "$ref": "#/components/parameters/dataEntityName"
                     },
                     {
-                        "name": "environment",
-                        "in": "path",
-                        "required": true,
-                        "description": "Environment to use. Used as part of the URL",
-                        "schema": {
-                            "type": "string",
-                            "default": "vtexcommercestable"
-                        }
+                        "$ref": "#/components/parameters/Content-Type"
                     },
                     {
-                        "name": "data_entity_name",
-                        "in": "path",
-                        "required": true,
-                        "description": "Name of the data entity",
-                        "schema": {
-                            "type": "string",
-                            "default": "{{data_entity_name}}"
-                        }
+                        "$ref": "#/components/parameters/Accept"
                     },
                     {
-                        "name": "Content-Type",
-                        "in": "header",
-                        "description": "Type of the content being sent",
-                        "required": true,
-                        "style": "simple",
-                        "schema": {
-                            "type": "string",
-                            "default": "application/json"
-                        }
-                    },
-                    {
-                        "name": "Accept",
-                        "in": "header",
-                        "description": "HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand ",
-                        "required": true,
-                        "style": "simple",
-                        "schema": {
-                            "type": "string",
-                            "default": "application/vnd.vtex.ds.v10+json"
-                        }
-                    },
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Id of the Document",
-                        "required": true,
-                        "style": "simple",
-                        "schema": {
-                            "type": "string",
-                            "default": "{{id}}"
-                        }
+                        "$ref": "#/components/parameters/id"
                     },
                     {
                         "name": "versionId",
                         "in": "path",
-                        "description": "Id of the version to update",
+                        "description": "ID of the version to update",
                         "required": true,
                         "style": "simple",
                         "schema": {
@@ -1745,20 +793,15 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "",
-                        "headers": {},
+                        "description": "OK",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Putversion"
+                                    "$ref": "#/components/schemas/documentResponse"
                                 },
-                                "examples": {
-                                    "response": {
-                                        "value": {
-                                            "Id": "CL-b818cbda-e489-11e6-94f4-0ac138d2d42e",
-                                            "Href": "http://api.vtex.com/my-store-name/dataentities/CL/documents/b818cbda-e489-11e6-94f4-0ac138d2d42e"
-                                        }
-                                    }
+                                "example": {
+                                    "Id": "CL-b818cbda-e489-11e6-94f4-0ac138d2d42e",
+                                    "Href": "http://api.vtex.com/my-store-name/dataentities/CL/documents/b818cbda-e489-11e6-94f4-0ac138d2d42e"
                                 }
                             }
                         }
@@ -1792,78 +835,148 @@
                 "title": "DocumentRequest",
                 "type": "object",
                 "additionalProperties": true,
-                "description": "This can be any pure JSON document. Add new _Key-Value_ pairs to test"
+                "description": "This can be any pure JSON document. Add new _Key-Value_ pairs to test."
             },
-            "Createnewdocument": {
-                "title": "Createnewdocument",
-                "required": [
-                    "Id",
-                    "Href"
-                ],
+            "createUpdateDocumentRequests": {
                 "type": "object",
                 "properties": {
-                    "Id": {
-                        "type": "string"
+                    "email": {
+                        "type": "string",
+                        "description": "Client email address. Used in the `CL` data entity.",
+                        "example": "clark.kent@examplemail.com",
+                        "nullable": true
                     },
-                    "Href": {
-                        "type": "string"
-                    }
-                },
-                "example": {
-                    "Id": "CL-b818cbda-e489-11e6-94f4-0ac138d2d42e",
-                    "Href": "http://api.vtex.com/my-store-name/dataentities/CL/documents/b818cbda-e489-11e6-94f4-0ac138d2d42e"
-                }
-            },
-            "CreateorupdateentiredocumentRequest": {
-                "title": "CreateorupdateentiredocumentRequest",
-                "type": "object",
-                "additionalProperties": true,
-                "example": {
-                    "id": "4e4c55ac-e491-11e6-94f4-0ac138d2d42e",
-                    "Boolean": true,
-                    "Currency": 2.5,
-                    "Date": "1992-11-17",
-                    "Date_Time": "2016-09-14T19:21:01.3163733Z",
-                    "Decimal": 2.5,
-                    "Email": "meu@email.com",
-                    "Integer": 1000000,
-                    "Long": 1000000000,
-                    "Percent": 85.42,
-                    "Time": "23:50",
-                    "URL": "http://www.vtex.com",
-                    "Varchar10": "Lorem ipsu",
-                    "Varchar50": "Lorem ipsum dolor sit amet, consectetur adipiscing",
-                    "Varchar750": "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
-                    "Varchar100": "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
-                    "Relationship": "5eb31afb-7ab0-11e6-94b4-0a44686e393f",
-                    "Text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.... "
-                }
-            },
-            "CreateorupdatepartialdocumentRequest": {
-                "title": "CreateorupdatepartialdocumentRequest",
-                "type": "object",
-                "additionalProperties": true,
-                "properties": {
-                    "id": {
-                        "type": "string"
+                    "firstName": {
+                        "type": "string",
+                        "description": "Client first name. Used in the `CL` data entity.",
+                        "example": "Clark",
+                        "nullable": true
                     },
-                    "Boolean": {
-                        "type": "boolean"
+                    "lastName": {
+                        "type": "string",
+                        "description": "Client last name. Used in the `CL` data entity.",
+                        "example": "Kent",
+                        "nullable": true
+                    },
+                    "phone": {
+                        "type": "string",
+                        "description": "Client telephone number. Used in the `CL` data entity.",
+                        "example": "+12025550195",
+                        "nullable": true
+                    },
+                    "documentType": {
+                        "type": "string",
+                        "description": "Client document type. Used in the `CL` data entity.",
+                        "example": "CPF",
+                        "nullable": true
+                    },
+                    "document": {
+                        "type": "string",
+                        "description": "Client document. Used in the `CL` data entity.",
+                        "example": "12345678900",
+                        "nullable": true
+                    },
+                    "isCorporate": {
+                        "type": "boolean",
+                        "description": "Indicates whether client is corporate. Used in the `CL` data entity.",
+                        "example": false,
+                        "nullable": true
+                    },
+                    "isNewsletterOptIn": {
+                        "type": "boolean",
+                        "description": "Indicates whether client otped to receive the store newsletter. Used in the `CL` data entity.",
+                        "example": false,
+                        "nullable": true
+                    },
+                    "localeDefault": {
+                        "type": "string",
+                        "description": "Default locale, used to set store language and currency, for example. Used in the `CL` data entity.",
+                        "example": "en-US",
+                        "nullable": true
+                    },
+                    "addressName": {
+                        "type": "string",
+                        "description": "Address name. Used in the `AD` data entity.",
+                        "example": "My house",
+                        "nullable": true
+                    },
+                    "addressType": {
+                        "type": "string",
+                        "description": "Type of address. For example, `Residential` or `Pickup`, among others. Used in the `AD` data entity.",
+                        "example": "residential",
+                        "nullable": true
+                    },
+                    "receiverName": {
+                        "type": "string",
+                        "description": "Name of the person who is going to receive the order. Used in the `AD` data entity.",
+                        "example": "Clark Kent.",
+                        "nullable": true
+                    },
+                    "city": {
+                        "type": "string",
+                        "description": "City of the shipping address. Used in the `AD` data entity.",
+                        "example": "Rio de Janeiro",
+                        "nullable": true
+                    },
+                    "state": {
+                        "type": "string",
+                        "description": "State of the shipping address. Used in the `AD` data entity.",
+                        "example": "Rio de Janeiro",
+                        "nullable": true
+                    },
+                    "country": {
+                        "type": "string",
+                        "description": "Three letter ISO code of the country of the shipping address. Used in the `AD` data entity.",
+                        "example": "BRA",
+                        "nullable": true
+                    },
+                    "postalCode": {
+                        "type": "string",
+                        "description": "Postal Code. Used in the `AD` data entity.",
+                        "example": "12345-000",
+                        "nullable": true
+                    },
+                    "street": {
+                        "type": "string",
+                        "description": "Street of the address. Used in the `AD` data entity.",
+                        "example": "Praia de Botafogo",
+                        "nullable": true
+                    },
+                    "number": {
+                        "type": "string",
+                        "description": "Number of the building, house or apartment in the shipping address. Used in the `AD` data entity.",
+                        "example": "300",
+                        "nullable": true
+                    },
+                    "neighborhood": {
+                        "type": "string",
+                        "description": "Neighborhood of the address. Used in the `AD` data entity.",
+                        "example": "Botafogo",
+                        "nullable": true
+                    },
+                    "complement": {
+                        "type": "string",
+                        "description": "Complement to the shipping address in case it applies. Used in the `AD` data entity.",
+                        "example": "3rd floor",
+                        "nullable": true
+                    },
+                    "reference": {
+                        "type": "string",
+                        "description": "Complement that might help locate the shipping address more precisely in case of delivery. Used in the `AD` data entity.",
+                        "example": "Grey building",
+                        "nullable": true
+                    },
+                    "userId": {
+                        "type": "string",
+                        "description": "ID of the client to whom the address belongs. Used in the `AD` data entity.",
+                        "example": "7e03m794-a33a-11e9-84rt6-0adfa64s5a8e",
+                        "nullable": true
                     }
-                },
-                "example": {
-                    "id": "4e4c55ac-e491-11e6-94f4-0ac138d2d42e",
-                    "Boolean": true
                 }
             },
             "Using_fields_all": {
                 "title": "Using_fields=_all",
-                "required": [
-                    "id",
-                    "accountId",
-                    "accountName",
-                    "dataEntityId"
-                ],
+                "required": ["id", "accountId", "accountName", "dataEntityId"],
                 "type": "object",
                 "properties": {
                     "id": {
@@ -1886,50 +999,9 @@
                     "dataEntityId": "CL"
                 }
             },
-            "UpdateentiredocumentRequest": {
-                "title": "UpdateentiredocumentRequest",
-                "additionalProperties": true,
-                "type": "object",
-                "example": {
-                    "Boolean": true,
-                    "Currency": 2.5,
-                    "Date": "1992-11-17",
-                    "Date_Time": "2016-09-14T19:21:01.3163733Z",
-                    "Decimal": 2.5,
-                    "Email": "meu@email.com",
-                    "Integer": 1000000,
-                    "Long": 1000000000,
-                    "Percent": 85.42,
-                    "Time": "23:50",
-                    "URL": "http://www.vtex.com",
-                    "Varchar10": "Lorem ipsu",
-                    "Varchar50": "Lorem ipsum dolor sit amet, consectetur adipiscing",
-                    "Varchar750": "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
-                    "Varchar100": "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
-                    "Relationship": "5eb31afb-7ab0-11e6-94b4-0a44686e393f",
-                    "Text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit..."
-                }
-            },
-            "UpdatepartialdocumentRequest": {
-                "title": "UpdatepartialdocumentRequest",
-                "required": [
-                    "Boolean"
-                ],
-                "type": "object",
-                "properties": {
-                    "Boolean": {
-                        "type": "boolean"
-                    }
-                },
-                "example": {
-                    "Boolean": false
-                }
-            },
             "SaveschemabynameRequest": {
                 "title": "SaveschemabynameRequest",
-                "required": [
-                    "properties"
-                ],
+                "required": ["properties"],
                 "type": "object",
                 "properties": {
                     "properties": {
@@ -1946,9 +1018,7 @@
             },
             "Properties": {
                 "title": "Properties",
-                "required": [
-                    "name"
-                ],
+                "required": ["name"],
                 "type": "object",
                 "properties": {
                     "name": {
@@ -1963,9 +1033,7 @@
             },
             "Name": {
                 "title": "Name",
-                "required": [
-                    "type"
-                ],
+                "required": ["type"],
                 "type": "object",
                 "properties": {
                     "type": {
@@ -1978,35 +1046,31 @@
             },
             "PutindicesRequest": {
                 "title": "PutindicesRequest",
-                "required": [
-                    "name",
-                    "multiple",
-                    "fields"
-                ],
+                "required": ["name", "multiple", "fields"],
                 "type": "object",
                 "properties": {
                     "name": {
+                        "description": "Name to identify the index",
                         "type": "string"
                     },
                     "multiple": {
+                        "description": "Determines whether the values need to be unique. If false, values must be unique.",
                         "type": "boolean"
                     },
                     "fields": {
+                        "description": "Comma-separted fields of the index",
                         "type": "string"
                     }
                 },
                 "example": {
-                    "name": "indiceName",
+                    "name": "indexName",
                     "multiple": false,
                     "fields": "fieldName"
                 }
             },
             "ValidatedocumentbyclustersRequest": {
                 "title": "ValidatedocumentbyclustersRequest",
-                "required": [
-                    "name",
-                    "rule"
-                ],
+                "required": ["name", "rule"],
                 "type": "object",
                 "properties": {
                     "name": {
@@ -2023,10 +1087,7 @@
             },
             "Listversion": {
                 "title": "Listversion",
-                "required": [
-                    "id",
-                    "date"
-                ],
+                "required": ["id", "date"],
                 "type": "object",
                 "properties": {
                     "id": {
@@ -2034,20 +1095,15 @@
                     },
                     "date": {
                         "type": "string"
+                    },
+                    "document": {
+                        "type": "object"
                     }
-                },
-                "example": {
-                    "id": "_EAR0cJ7XB5k5grnmm0zeKGlVvVM9WCPV_",
-                    "date": "2016-10-18T16:53:32+00:00"
                 }
             },
             "Getversion": {
                 "title": "Getversion",
-                "required": [
-                    "id",
-                    "author",
-                    "document"
-                ],
+                "required": ["id", "author", "document"],
                 "type": "object",
                 "properties": {
                     "id": {
@@ -2173,10 +1229,7 @@
             },
             "DepartmentVisitedTag": {
                 "title": "DepartmentVisitedTag",
-                "required": [
-                    "DisplayValue",
-                    "Scores"
-                ],
+                "required": ["DisplayValue", "Scores"],
                 "type": "object",
                 "properties": {
                     "DisplayValue": {
@@ -2201,9 +1254,7 @@
             },
             "Scores": {
                 "title": "Scores",
-                "required": [
-                    "Ar e Ventilação"
-                ],
+                "required": ["Ar e Ventilação"],
                 "type": "object",
                 "properties": {
                     "Ar e Ventilação": {
@@ -2226,11 +1277,7 @@
             },
             "ArEVentilaO": {
                 "title": "ArEVentilaO",
-                "required": [
-                    "Point",
-                    "Date",
-                    "Until"
-                ],
+                "required": ["Point", "Date", "Until"],
                 "type": "object",
                 "properties": {
                     "Point": {
@@ -2250,24 +1297,184 @@
                     "Until": "2017-04-16T16:53:31.0842607Z"
                 }
             },
-            "Putversion": {
-                "title": "Putversion",
-                "required": [
-                    "Id",
-                    "Href"
-                ],
+            "documentResponse": {
+                "required": ["Id", "Href"],
                 "type": "object",
                 "properties": {
                     "Id": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "ID of the document that was created or updated."
                     },
                     "Href": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "Document reference URL."
                     }
-                },
-                "example": {
-                    "Id": "CL-b818cbda-e489-11e6-94f4-0ac138d2d42e",
-                    "Href": "http://api.vtex.com/my-store-name/dataentities/CL/documents/b818cbda-e489-11e6-94f4-0ac138d2d42e"
+                }
+            }
+        },
+        "parameters": {
+            "Content-Type": {
+                "name": "Content-Type",
+                "in": "header",
+                "description": "Type of the content being sent.",
+                "required": true,
+                "style": "simple",
+                "schema": {
+                    "type": "string",
+                    "example": "application/json"
+                }
+            },
+            "Accept": {
+                "name": "Accept",
+                "in": "header",
+                "description": "HTTP Client Negotiation _Accept_ Header. Indicates the types of responses the client can understand.",
+                "required": true,
+                "style": "simple",
+                "schema": {
+                    "type": "string",
+                    "example": "application/json"
+                }
+            },
+            "dataEntityName": {
+                "name": "dataEntityName",
+                "in": "path",
+                "required": true,
+                "description": "Name of the data entity. Defined by the api. Examples of native data entities you can use are `CL` for client profiles and `AD` for client addresses.",
+                "schema": {
+                    "type": "string",
+                    "example": "CL"
+                }
+            },
+            "_schema": {
+                "name": "_schema",
+                "in": "query",
+                "description": "Name of the schema the document to be created needs to be compliant with.",
+                "required": false,
+                "style": "form",
+                "schema": {
+                    "type": "string",
+                    "example": "schema"
+                }
+            },
+            "id": {
+                "name": "id",
+                "in": "path",
+                "description": "ID of the Document.",
+                "required": true,
+                "style": "simple",
+                "schema": {
+                    "type": "string",
+                    "example": "CL-b818cbda-e489-11e6-94f4-0ac138d2d42e"
+                }
+            },
+            "versionId": {
+                "name": "versionId",
+                "in": "path",
+                "description": "ID of the version to update.",
+                "required": true,
+                "style": "simple",
+                "schema": {
+                    "type": "string",
+                    "default": "123456789abc"
+                }
+            },
+            "_where": {
+                "name": "_where",
+                "in": "query",
+                "description": "Filter specification.",
+                "required": false,
+                "style": "form",
+                "schema": {
+                    "type": "string",
+                    "example": "firstName is not null."
+                }
+            },
+            "index_name": {
+                "name": "index_name",
+                "in": "path",
+                "description": "Name of the index.",
+                "required": true,
+                "style": "simple",
+                "schema": {
+                    "type": "string",
+                    "example": "{{index_name}}"
+                }
+            },
+            "schema_name": {
+                "name": "schema_name",
+                "in": "path",
+                "description": "Name of the schema.",
+                "required": true,
+                "style": "simple",
+                "schema": {
+                    "type": "string",
+                    "example": "{{schema}}"
+                }
+            },
+            "REST-Range": {
+                "name": "REST-Range",
+                "in": "header",
+                "description": "Defines the collection of documents to be returned. A range within the collection limited by 100 documents per query.",
+                "required": true,
+                "style": "simple",
+                "schema": {
+                    "type": "string",
+                    "example": "resources=0-10"
+                }
+            },
+            "_fields": {
+                "name": "_fields",
+                "in": "query",
+                "description": "Fields that should be returned by document. Separate fields' names with commas. For example `_fields=email,firstName,document`. You can also use `_all` to fetch all fields.",
+                "required": false,
+                "style": "form",
+                "schema": {
+                    "type": "string",
+                    "default": "email,firstName,document"
+                }
+            },
+            "_keyword": {
+                "name": "_keyword",
+                "in": "query",
+                "description": "String to search. Use quotes for a partial query. For example, `_keyword=Maria` or `_keyword=\"Maria\"`.",
+                "required": false,
+                "style": "form",
+                "schema": {
+                    "type": "string",
+                    "example": "String to search"
+                }
+            },
+            "_sort": {
+                "name": "_sort",
+                "in": "query",
+                "description": "Sets sorting mode in two parts. The first part is the name of the field you want to sort by. In the second part, use `ASC` for ascending or `DESC` for descending.",
+                "required": false,
+                "style": "form",
+                "schema": {
+                    "type": "string",
+                    "default": "firstName ASC"
+                }
+            },
+            "_token": {
+                "name": "_token",
+                "in": "query",
+                "description": "Value of the header `X-VTEX-MD-TOKEN` returned in your first request. Send its value in this query string in the subsequent requests. The token has a timeout of 10 minutes, which refreshes after each new request.",
+                "required": false,
+                "style": "form",
+                "schema": {
+                    "type": "string",
+                    "default": "{tokenValueExample}"
+                }
+            },
+            "_size": {
+                "name": "_size",
+                "in": "query",
+                "description": "Inform the number of documents per request. Maximum value of `1000`.",
+                "required": false,
+                "style": "form",
+                "schema": {
+                    "type": "integer",
+                    "default": 100
                 }
             }
         }
